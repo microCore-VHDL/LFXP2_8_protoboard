@@ -1,0 +1,1658 @@
+(edif internal_datamem_32
+  (edifVersion 2 0 0)
+  (edifLevel 0)
+  (keywordMap (keywordLevel 0))
+  (status
+    (written
+      (timestamp 2019 11 16 18 21 30)
+      (program "SCUBA" (version "Diamond (64-bit) 3.10.3.144"))))
+      (comment "C:\lscc\diamond\3.10_x64\ispfpga\bin\nt64\scuba.exe -w -n internal_datamem_32 -lang vhdl -synth synplify -bus_exp 7 -bb -arch mg5a00 -type bram -wp 10 -rp 1000 -addr_width 12 -data_width 32 -num_rows 3072 -writemode NORMAL -resetmode SYNC -cascade -1 ")
+  (library ORCLIB
+    (edifLevel 0)
+    (technology
+      (numberDefinition))
+    (cell AND2
+      (cellType GENERIC)
+      (view view1
+        (viewType NETLIST)
+        (interface
+          (port A
+            (direction INPUT))
+          (port B
+            (direction INPUT))
+          (port Z
+            (direction OUTPUT)))))
+    (cell FD1P3DX
+      (cellType GENERIC)
+      (view view1
+        (viewType NETLIST)
+        (interface
+          (port D
+            (direction INPUT))
+          (port SP
+            (direction INPUT))
+          (port CK
+            (direction INPUT))
+          (port CD
+            (direction INPUT))
+          (port Q
+            (direction OUTPUT)))))
+    (cell INV
+      (cellType GENERIC)
+      (view view1
+        (viewType NETLIST)
+        (interface
+          (port A
+            (direction INPUT))
+          (port Z
+            (direction OUTPUT)))))
+    (cell MUX21
+      (cellType GENERIC)
+      (view view1
+        (viewType NETLIST)
+        (interface
+          (port D0
+            (direction INPUT))
+          (port D1
+            (direction INPUT))
+          (port SD
+            (direction INPUT))
+          (port Z
+            (direction OUTPUT)))))
+    (cell VHI
+      (cellType GENERIC)
+      (view view1
+        (viewType NETLIST)
+        (interface
+          (port Z
+            (direction OUTPUT)))))
+    (cell VLO
+      (cellType GENERIC)
+      (view view1
+        (viewType NETLIST)
+        (interface
+          (port Z
+            (direction OUTPUT)))))
+    (cell DP16KB
+      (cellType GENERIC)
+      (view view1
+        (viewType NETLIST)
+        (interface
+          (port DIA0
+            (direction INPUT))
+          (port DIA1
+            (direction INPUT))
+          (port DIA2
+            (direction INPUT))
+          (port DIA3
+            (direction INPUT))
+          (port DIA4
+            (direction INPUT))
+          (port DIA5
+            (direction INPUT))
+          (port DIA6
+            (direction INPUT))
+          (port DIA7
+            (direction INPUT))
+          (port DIA8
+            (direction INPUT))
+          (port DIA9
+            (direction INPUT))
+          (port DIA10
+            (direction INPUT))
+          (port DIA11
+            (direction INPUT))
+          (port DIA12
+            (direction INPUT))
+          (port DIA13
+            (direction INPUT))
+          (port DIA14
+            (direction INPUT))
+          (port DIA15
+            (direction INPUT))
+          (port DIA16
+            (direction INPUT))
+          (port DIA17
+            (direction INPUT))
+          (port ADA0
+            (direction INPUT))
+          (port ADA1
+            (direction INPUT))
+          (port ADA2
+            (direction INPUT))
+          (port ADA3
+            (direction INPUT))
+          (port ADA4
+            (direction INPUT))
+          (port ADA5
+            (direction INPUT))
+          (port ADA6
+            (direction INPUT))
+          (port ADA7
+            (direction INPUT))
+          (port ADA8
+            (direction INPUT))
+          (port ADA9
+            (direction INPUT))
+          (port ADA10
+            (direction INPUT))
+          (port ADA11
+            (direction INPUT))
+          (port ADA12
+            (direction INPUT))
+          (port ADA13
+            (direction INPUT))
+          (port CEA
+            (direction INPUT))
+          (port CLKA
+            (direction INPUT))
+          (port WEA
+            (direction INPUT))
+          (port CSA0
+            (direction INPUT))
+          (port CSA1
+            (direction INPUT))
+          (port CSA2
+            (direction INPUT))
+          (port RSTA
+            (direction INPUT))
+          (port DIB0
+            (direction INPUT))
+          (port DIB1
+            (direction INPUT))
+          (port DIB2
+            (direction INPUT))
+          (port DIB3
+            (direction INPUT))
+          (port DIB4
+            (direction INPUT))
+          (port DIB5
+            (direction INPUT))
+          (port DIB6
+            (direction INPUT))
+          (port DIB7
+            (direction INPUT))
+          (port DIB8
+            (direction INPUT))
+          (port DIB9
+            (direction INPUT))
+          (port DIB10
+            (direction INPUT))
+          (port DIB11
+            (direction INPUT))
+          (port DIB12
+            (direction INPUT))
+          (port DIB13
+            (direction INPUT))
+          (port DIB14
+            (direction INPUT))
+          (port DIB15
+            (direction INPUT))
+          (port DIB16
+            (direction INPUT))
+          (port DIB17
+            (direction INPUT))
+          (port ADB0
+            (direction INPUT))
+          (port ADB1
+            (direction INPUT))
+          (port ADB2
+            (direction INPUT))
+          (port ADB3
+            (direction INPUT))
+          (port ADB4
+            (direction INPUT))
+          (port ADB5
+            (direction INPUT))
+          (port ADB6
+            (direction INPUT))
+          (port ADB7
+            (direction INPUT))
+          (port ADB8
+            (direction INPUT))
+          (port ADB9
+            (direction INPUT))
+          (port ADB10
+            (direction INPUT))
+          (port ADB11
+            (direction INPUT))
+          (port ADB12
+            (direction INPUT))
+          (port ADB13
+            (direction INPUT))
+          (port CEB
+            (direction INPUT))
+          (port CLKB
+            (direction INPUT))
+          (port WEB
+            (direction INPUT))
+          (port CSB0
+            (direction INPUT))
+          (port CSB1
+            (direction INPUT))
+          (port CSB2
+            (direction INPUT))
+          (port RSTB
+            (direction INPUT))
+          (port DOA0
+            (direction OUTPUT))
+          (port DOA1
+            (direction OUTPUT))
+          (port DOA2
+            (direction OUTPUT))
+          (port DOA3
+            (direction OUTPUT))
+          (port DOA4
+            (direction OUTPUT))
+          (port DOA5
+            (direction OUTPUT))
+          (port DOA6
+            (direction OUTPUT))
+          (port DOA7
+            (direction OUTPUT))
+          (port DOA8
+            (direction OUTPUT))
+          (port DOA9
+            (direction OUTPUT))
+          (port DOA10
+            (direction OUTPUT))
+          (port DOA11
+            (direction OUTPUT))
+          (port DOA12
+            (direction OUTPUT))
+          (port DOA13
+            (direction OUTPUT))
+          (port DOA14
+            (direction OUTPUT))
+          (port DOA15
+            (direction OUTPUT))
+          (port DOA16
+            (direction OUTPUT))
+          (port DOA17
+            (direction OUTPUT))
+          (port DOB0
+            (direction OUTPUT))
+          (port DOB1
+            (direction OUTPUT))
+          (port DOB2
+            (direction OUTPUT))
+          (port DOB3
+            (direction OUTPUT))
+          (port DOB4
+            (direction OUTPUT))
+          (port DOB5
+            (direction OUTPUT))
+          (port DOB6
+            (direction OUTPUT))
+          (port DOB7
+            (direction OUTPUT))
+          (port DOB8
+            (direction OUTPUT))
+          (port DOB9
+            (direction OUTPUT))
+          (port DOB10
+            (direction OUTPUT))
+          (port DOB11
+            (direction OUTPUT))
+          (port DOB12
+            (direction OUTPUT))
+          (port DOB13
+            (direction OUTPUT))
+          (port DOB14
+            (direction OUTPUT))
+          (port DOB15
+            (direction OUTPUT))
+          (port DOB16
+            (direction OUTPUT))
+          (port DOB17
+            (direction OUTPUT)))))
+    (cell internal_datamem_32
+      (cellType GENERIC)
+      (view view1
+        (viewType NETLIST)
+        (interface
+          (port Clock
+            (direction INPUT))
+          (port ClockEn
+            (direction INPUT))
+          (port Reset
+            (direction INPUT))
+          (port WE
+            (direction INPUT))
+          (port (array (rename Address "Address(11:0)") 12)
+            (direction INPUT))
+          (port (array (rename Data "Data(31:0)") 32)
+            (direction INPUT))
+          (port (array (rename Q "Q(31:0)") 32)
+            (direction OUTPUT)))
+        (property NGD_DRC_MASK (integer 1))
+        (contents
+          (instance INV_0
+            (viewRef view1 
+              (cellRef INV)))
+          (instance AND2_t0
+            (viewRef view1 
+              (cellRef AND2)))
+          (instance internal_datamem_32_0_0_5
+            (viewRef view1 
+              (cellRef DP16KB))
+            (property MEM_LPC_FILE
+              (string "internal_datamem_32.lpc"))
+            (property MEM_INIT_FILE
+              (string ""))
+            (property CSDECODE_B
+              (string "0b111"))
+            (property CSDECODE_A
+              (string "0b000"))
+            (property WRITEMODE_B
+              (string "NORMAL"))
+            (property WRITEMODE_A
+              (string "NORMAL"))
+            (property GSR
+              (string "DISABLED"))
+            (property RESETMODE
+              (string "SYNC"))
+            (property REGMODE_B
+              (string "NOREG"))
+            (property REGMODE_A
+              (string "NOREG"))
+            (property DATA_WIDTH_B
+              (string "9"))
+            (property DATA_WIDTH_A
+              (string "9")))
+          (instance internal_datamem_32_0_1_4
+            (viewRef view1 
+              (cellRef DP16KB))
+            (property MEM_LPC_FILE
+              (string "internal_datamem_32.lpc"))
+            (property MEM_INIT_FILE
+              (string ""))
+            (property CSDECODE_B
+              (string "0b111"))
+            (property CSDECODE_A
+              (string "0b000"))
+            (property WRITEMODE_B
+              (string "NORMAL"))
+            (property WRITEMODE_A
+              (string "NORMAL"))
+            (property GSR
+              (string "DISABLED"))
+            (property RESETMODE
+              (string "SYNC"))
+            (property REGMODE_B
+              (string "NOREG"))
+            (property REGMODE_A
+              (string "NOREG"))
+            (property DATA_WIDTH_B
+              (string "9"))
+            (property DATA_WIDTH_A
+              (string "9")))
+          (instance internal_datamem_32_0_2_3
+            (viewRef view1 
+              (cellRef DP16KB))
+            (property MEM_LPC_FILE
+              (string "internal_datamem_32.lpc"))
+            (property MEM_INIT_FILE
+              (string ""))
+            (property CSDECODE_B
+              (string "0b111"))
+            (property CSDECODE_A
+              (string "0b000"))
+            (property WRITEMODE_B
+              (string "NORMAL"))
+            (property WRITEMODE_A
+              (string "NORMAL"))
+            (property GSR
+              (string "DISABLED"))
+            (property RESETMODE
+              (string "SYNC"))
+            (property REGMODE_B
+              (string "NOREG"))
+            (property REGMODE_A
+              (string "NOREG"))
+            (property DATA_WIDTH_B
+              (string "9"))
+            (property DATA_WIDTH_A
+              (string "9")))
+          (instance internal_datamem_32_0_3_2
+            (viewRef view1 
+              (cellRef DP16KB))
+            (property MEM_LPC_FILE
+              (string "internal_datamem_32.lpc"))
+            (property MEM_INIT_FILE
+              (string ""))
+            (property CSDECODE_B
+              (string "0b111"))
+            (property CSDECODE_A
+              (string "0b000"))
+            (property WRITEMODE_B
+              (string "NORMAL"))
+            (property WRITEMODE_A
+              (string "NORMAL"))
+            (property GSR
+              (string "DISABLED"))
+            (property RESETMODE
+              (string "SYNC"))
+            (property REGMODE_B
+              (string "NOREG"))
+            (property REGMODE_A
+              (string "NOREG"))
+            (property DATA_WIDTH_B
+              (string "9"))
+            (property DATA_WIDTH_A
+              (string "9")))
+          (instance internal_datamem_32_1_0_1
+            (viewRef view1 
+              (cellRef DP16KB))
+            (property MEM_LPC_FILE
+              (string "internal_datamem_32.lpc"))
+            (property MEM_INIT_FILE
+              (string ""))
+            (property CSDECODE_B
+              (string "0b111"))
+            (property CSDECODE_A
+              (string "0b010"))
+            (property WRITEMODE_B
+              (string "NORMAL"))
+            (property WRITEMODE_A
+              (string "NORMAL"))
+            (property GSR
+              (string "DISABLED"))
+            (property RESETMODE
+              (string "SYNC"))
+            (property REGMODE_B
+              (string "NOREG"))
+            (property REGMODE_A
+              (string "NOREG"))
+            (property DATA_WIDTH_B
+              (string "18"))
+            (property DATA_WIDTH_A
+              (string "18")))
+          (instance scuba_vhi_inst
+            (viewRef view1 
+              (cellRef VHI)))
+          (instance internal_datamem_32_1_1_0
+            (viewRef view1 
+              (cellRef DP16KB))
+            (property MEM_LPC_FILE
+              (string "internal_datamem_32.lpc"))
+            (property MEM_INIT_FILE
+              (string ""))
+            (property CSDECODE_B
+              (string "0b111"))
+            (property CSDECODE_A
+              (string "0b010"))
+            (property WRITEMODE_B
+              (string "NORMAL"))
+            (property WRITEMODE_A
+              (string "NORMAL"))
+            (property GSR
+              (string "DISABLED"))
+            (property RESETMODE
+              (string "SYNC"))
+            (property REGMODE_B
+              (string "NOREG"))
+            (property REGMODE_A
+              (string "NOREG"))
+            (property DATA_WIDTH_B
+              (string "18"))
+            (property DATA_WIDTH_A
+              (string "18")))
+          (instance scuba_vlo_inst
+            (viewRef view1 
+              (cellRef VLO)))
+          (instance FF_0
+            (viewRef view1 
+              (cellRef FD1P3DX))
+            (property GSR
+              (string "ENABLED")))
+          (instance mux_31
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_30
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_29
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_28
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_27
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_26
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_25
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_24
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_23
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_22
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_21
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_20
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_19
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_18
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_17
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_16
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_15
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_14
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_13
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_12
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_11
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_10
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_9
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_8
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_7
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_6
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_5
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_4
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_3
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_2
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_1
+            (viewRef view1 
+              (cellRef MUX21)))
+          (instance mux_0
+            (viewRef view1 
+              (cellRef MUX21)))
+          (net wren_inv
+            (joined
+              (portRef A (instanceRef AND2_t0))
+              (portRef Z (instanceRef INV_0))))
+          (net scuba_vhi
+            (joined
+              (portRef Z (instanceRef scuba_vhi_inst))
+              (portRef CEB (instanceRef internal_datamem_32_0_0_5))
+              (portRef CEB (instanceRef internal_datamem_32_0_1_4))
+              (portRef CEB (instanceRef internal_datamem_32_0_2_3))
+              (portRef CEB (instanceRef internal_datamem_32_0_3_2))
+              (portRef CEB (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADA1 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADA0 (instanceRef internal_datamem_32_1_0_1))
+              (portRef CEB (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADA1 (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADA0 (instanceRef internal_datamem_32_1_1_0))))
+          (net scuba_vlo
+            (joined
+              (portRef Z (instanceRef scuba_vlo_inst))
+              (portRef CSB2 (instanceRef internal_datamem_32_0_0_5))
+              (portRef CSA2 (instanceRef internal_datamem_32_0_0_5))
+              (portRef CSB1 (instanceRef internal_datamem_32_0_0_5))
+              (portRef CSA1 (instanceRef internal_datamem_32_0_0_5))
+              (portRef CSB0 (instanceRef internal_datamem_32_0_0_5))
+              (portRef RSTB (instanceRef internal_datamem_32_0_0_5))
+              (portRef WEB (instanceRef internal_datamem_32_0_0_5))
+              (portRef CLKB (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADB13 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADB12 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADB11 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADB10 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADB9 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADB8 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADB7 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADB6 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADB5 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADB4 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADB3 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADB2 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADA2 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADB1 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADA1 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADB0 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADA0 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB17 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA17 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB16 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA16 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB15 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA15 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB14 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA14 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB13 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA13 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB12 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA12 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB11 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA11 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB10 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA10 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB9 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA9 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB8 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB7 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB6 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB5 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB4 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB3 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB2 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB1 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIB0 (instanceRef internal_datamem_32_0_0_5))
+              (portRef CSB2 (instanceRef internal_datamem_32_0_1_4))
+              (portRef CSA2 (instanceRef internal_datamem_32_0_1_4))
+              (portRef CSB1 (instanceRef internal_datamem_32_0_1_4))
+              (portRef CSA1 (instanceRef internal_datamem_32_0_1_4))
+              (portRef CSB0 (instanceRef internal_datamem_32_0_1_4))
+              (portRef RSTB (instanceRef internal_datamem_32_0_1_4))
+              (portRef WEB (instanceRef internal_datamem_32_0_1_4))
+              (portRef CLKB (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADB13 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADB12 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADB11 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADB10 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADB9 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADB8 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADB7 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADB6 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADB5 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADB4 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADB3 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADB2 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADA2 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADB1 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADA1 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADB0 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADA0 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB17 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA17 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB16 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA16 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB15 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA15 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB14 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA14 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB13 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA13 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB12 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA12 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB11 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA11 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB10 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA10 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB9 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA9 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB8 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB7 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB6 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB5 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB4 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB3 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB2 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB1 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIB0 (instanceRef internal_datamem_32_0_1_4))
+              (portRef CSB2 (instanceRef internal_datamem_32_0_2_3))
+              (portRef CSA2 (instanceRef internal_datamem_32_0_2_3))
+              (portRef CSB1 (instanceRef internal_datamem_32_0_2_3))
+              (portRef CSA1 (instanceRef internal_datamem_32_0_2_3))
+              (portRef CSB0 (instanceRef internal_datamem_32_0_2_3))
+              (portRef RSTB (instanceRef internal_datamem_32_0_2_3))
+              (portRef WEB (instanceRef internal_datamem_32_0_2_3))
+              (portRef CLKB (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADB13 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADB12 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADB11 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADB10 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADB9 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADB8 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADB7 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADB6 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADB5 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADB4 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADB3 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADB2 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADA2 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADB1 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADA1 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADB0 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADA0 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB17 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA17 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB16 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA16 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB15 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA15 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB14 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA14 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB13 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA13 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB12 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA12 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB11 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA11 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB10 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA10 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB9 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA9 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB8 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB7 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB6 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB5 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB4 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB3 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB2 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB1 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIB0 (instanceRef internal_datamem_32_0_2_3))
+              (portRef CSB2 (instanceRef internal_datamem_32_0_3_2))
+              (portRef CSA2 (instanceRef internal_datamem_32_0_3_2))
+              (portRef CSB1 (instanceRef internal_datamem_32_0_3_2))
+              (portRef CSA1 (instanceRef internal_datamem_32_0_3_2))
+              (portRef CSB0 (instanceRef internal_datamem_32_0_3_2))
+              (portRef RSTB (instanceRef internal_datamem_32_0_3_2))
+              (portRef WEB (instanceRef internal_datamem_32_0_3_2))
+              (portRef CLKB (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADB13 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADB12 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADB11 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADB10 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADB9 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADB8 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADB7 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADB6 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADB5 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADB4 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADB3 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADB2 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADA2 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADB1 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADA1 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADB0 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADA0 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB17 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA17 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB16 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA16 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB15 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA15 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB14 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA14 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB13 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA13 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB12 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA12 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB11 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA11 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB10 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA10 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB9 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA9 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB8 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA8 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB7 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA7 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB6 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA6 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB5 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA5 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB4 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB3 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB2 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB1 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIB0 (instanceRef internal_datamem_32_0_3_2))
+              (portRef CSB2 (instanceRef internal_datamem_32_1_0_1))
+              (portRef CSA2 (instanceRef internal_datamem_32_1_0_1))
+              (portRef CSB1 (instanceRef internal_datamem_32_1_0_1))
+              (portRef CSB0 (instanceRef internal_datamem_32_1_0_1))
+              (portRef RSTB (instanceRef internal_datamem_32_1_0_1))
+              (portRef WEB (instanceRef internal_datamem_32_1_0_1))
+              (portRef CLKB (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADB13 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADB12 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADB11 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADB10 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADB9 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADB8 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADB7 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADB6 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADB5 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADB4 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADB3 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADA3 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADB2 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADA2 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADB1 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADB0 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB17 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB16 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB15 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB14 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB13 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB12 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB11 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB10 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB9 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB8 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB7 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB6 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB5 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB4 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB3 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB2 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB1 (instanceRef internal_datamem_32_1_0_1))
+              (portRef DIB0 (instanceRef internal_datamem_32_1_0_1))
+              (portRef CSB2 (instanceRef internal_datamem_32_1_1_0))
+              (portRef CSA2 (instanceRef internal_datamem_32_1_1_0))
+              (portRef CSB1 (instanceRef internal_datamem_32_1_1_0))
+              (portRef CSB0 (instanceRef internal_datamem_32_1_1_0))
+              (portRef RSTB (instanceRef internal_datamem_32_1_1_0))
+              (portRef WEB (instanceRef internal_datamem_32_1_1_0))
+              (portRef CLKB (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADB13 (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADB12 (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADB11 (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADB10 (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADB9 (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADB8 (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADB7 (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADB6 (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADB5 (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADB4 (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADB3 (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADA3 (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADB2 (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADA2 (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADB1 (instanceRef internal_datamem_32_1_1_0))
+              (portRef ADB0 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB17 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIA17 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB16 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIA16 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB15 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIA15 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB14 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIA14 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB13 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB12 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB11 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB10 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB9 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB8 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB7 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB6 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB5 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB4 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB3 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB2 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB1 (instanceRef internal_datamem_32_1_1_0))
+              (portRef DIB0 (instanceRef internal_datamem_32_1_1_0))
+              (portRef CD (instanceRef FF_0))))
+          (net wren_inv_g
+            (joined
+              (portRef SP (instanceRef FF_0))
+              (portRef Z (instanceRef AND2_t0))))
+          (net mdout0_1_0
+            (joined
+              (portRef D1 (instanceRef mux_31))
+              (portRef DOA0 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_0
+            (joined
+              (portRef D0 (instanceRef mux_31))
+              (portRef DOA0 (instanceRef internal_datamem_32_0_0_5))))
+          (net mdout0_1_1
+            (joined
+              (portRef D1 (instanceRef mux_30))
+              (portRef DOA1 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_1
+            (joined
+              (portRef D0 (instanceRef mux_30))
+              (portRef DOA1 (instanceRef internal_datamem_32_0_0_5))))
+          (net mdout0_1_2
+            (joined
+              (portRef D1 (instanceRef mux_29))
+              (portRef DOA2 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_2
+            (joined
+              (portRef D0 (instanceRef mux_29))
+              (portRef DOA2 (instanceRef internal_datamem_32_0_0_5))))
+          (net mdout0_1_3
+            (joined
+              (portRef D1 (instanceRef mux_28))
+              (portRef DOA3 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_3
+            (joined
+              (portRef D0 (instanceRef mux_28))
+              (portRef DOA3 (instanceRef internal_datamem_32_0_0_5))))
+          (net mdout0_1_4
+            (joined
+              (portRef D1 (instanceRef mux_27))
+              (portRef DOA4 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_4
+            (joined
+              (portRef D0 (instanceRef mux_27))
+              (portRef DOA4 (instanceRef internal_datamem_32_0_0_5))))
+          (net mdout0_1_5
+            (joined
+              (portRef D1 (instanceRef mux_26))
+              (portRef DOA5 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_5
+            (joined
+              (portRef D0 (instanceRef mux_26))
+              (portRef DOA5 (instanceRef internal_datamem_32_0_0_5))))
+          (net mdout0_1_6
+            (joined
+              (portRef D1 (instanceRef mux_25))
+              (portRef DOA6 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_6
+            (joined
+              (portRef D0 (instanceRef mux_25))
+              (portRef DOA6 (instanceRef internal_datamem_32_0_0_5))))
+          (net mdout0_1_7
+            (joined
+              (portRef D1 (instanceRef mux_24))
+              (portRef DOA7 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_7
+            (joined
+              (portRef D0 (instanceRef mux_24))
+              (portRef DOA7 (instanceRef internal_datamem_32_0_0_5))))
+          (net mdout0_1_8
+            (joined
+              (portRef D1 (instanceRef mux_23))
+              (portRef DOA8 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_8
+            (joined
+              (portRef D0 (instanceRef mux_23))
+              (portRef DOA8 (instanceRef internal_datamem_32_0_0_5))))
+          (net mdout0_1_9
+            (joined
+              (portRef D1 (instanceRef mux_22))
+              (portRef DOA9 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_9
+            (joined
+              (portRef D0 (instanceRef mux_22))
+              (portRef DOA0 (instanceRef internal_datamem_32_0_1_4))))
+          (net mdout0_1_10
+            (joined
+              (portRef D1 (instanceRef mux_21))
+              (portRef DOA10 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_10
+            (joined
+              (portRef D0 (instanceRef mux_21))
+              (portRef DOA1 (instanceRef internal_datamem_32_0_1_4))))
+          (net mdout0_1_11
+            (joined
+              (portRef D1 (instanceRef mux_20))
+              (portRef DOA11 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_11
+            (joined
+              (portRef D0 (instanceRef mux_20))
+              (portRef DOA2 (instanceRef internal_datamem_32_0_1_4))))
+          (net mdout0_1_12
+            (joined
+              (portRef D1 (instanceRef mux_19))
+              (portRef DOA12 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_12
+            (joined
+              (portRef D0 (instanceRef mux_19))
+              (portRef DOA3 (instanceRef internal_datamem_32_0_1_4))))
+          (net mdout0_1_13
+            (joined
+              (portRef D1 (instanceRef mux_18))
+              (portRef DOA13 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_13
+            (joined
+              (portRef D0 (instanceRef mux_18))
+              (portRef DOA4 (instanceRef internal_datamem_32_0_1_4))))
+          (net mdout0_1_14
+            (joined
+              (portRef D1 (instanceRef mux_17))
+              (portRef DOA14 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_14
+            (joined
+              (portRef D0 (instanceRef mux_17))
+              (portRef DOA5 (instanceRef internal_datamem_32_0_1_4))))
+          (net mdout0_1_15
+            (joined
+              (portRef D1 (instanceRef mux_16))
+              (portRef DOA15 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_15
+            (joined
+              (portRef D0 (instanceRef mux_16))
+              (portRef DOA6 (instanceRef internal_datamem_32_0_1_4))))
+          (net mdout0_1_16
+            (joined
+              (portRef D1 (instanceRef mux_15))
+              (portRef DOA16 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_16
+            (joined
+              (portRef D0 (instanceRef mux_15))
+              (portRef DOA7 (instanceRef internal_datamem_32_0_1_4))))
+          (net mdout0_1_17
+            (joined
+              (portRef D1 (instanceRef mux_14))
+              (portRef DOA17 (instanceRef internal_datamem_32_1_0_1))))
+          (net mdout0_0_17
+            (joined
+              (portRef D0 (instanceRef mux_14))
+              (portRef DOA8 (instanceRef internal_datamem_32_0_1_4))))
+          (net mdout0_1_18
+            (joined
+              (portRef D1 (instanceRef mux_13))
+              (portRef DOA0 (instanceRef internal_datamem_32_1_1_0))))
+          (net mdout0_0_18
+            (joined
+              (portRef D0 (instanceRef mux_13))
+              (portRef DOA0 (instanceRef internal_datamem_32_0_2_3))))
+          (net mdout0_1_19
+            (joined
+              (portRef D1 (instanceRef mux_12))
+              (portRef DOA1 (instanceRef internal_datamem_32_1_1_0))))
+          (net mdout0_0_19
+            (joined
+              (portRef D0 (instanceRef mux_12))
+              (portRef DOA1 (instanceRef internal_datamem_32_0_2_3))))
+          (net mdout0_1_20
+            (joined
+              (portRef D1 (instanceRef mux_11))
+              (portRef DOA2 (instanceRef internal_datamem_32_1_1_0))))
+          (net mdout0_0_20
+            (joined
+              (portRef D0 (instanceRef mux_11))
+              (portRef DOA2 (instanceRef internal_datamem_32_0_2_3))))
+          (net mdout0_1_21
+            (joined
+              (portRef D1 (instanceRef mux_10))
+              (portRef DOA3 (instanceRef internal_datamem_32_1_1_0))))
+          (net mdout0_0_21
+            (joined
+              (portRef D0 (instanceRef mux_10))
+              (portRef DOA3 (instanceRef internal_datamem_32_0_2_3))))
+          (net mdout0_1_22
+            (joined
+              (portRef D1 (instanceRef mux_9))
+              (portRef DOA4 (instanceRef internal_datamem_32_1_1_0))))
+          (net mdout0_0_22
+            (joined
+              (portRef D0 (instanceRef mux_9))
+              (portRef DOA4 (instanceRef internal_datamem_32_0_2_3))))
+          (net mdout0_1_23
+            (joined
+              (portRef D1 (instanceRef mux_8))
+              (portRef DOA5 (instanceRef internal_datamem_32_1_1_0))))
+          (net mdout0_0_23
+            (joined
+              (portRef D0 (instanceRef mux_8))
+              (portRef DOA5 (instanceRef internal_datamem_32_0_2_3))))
+          (net mdout0_1_24
+            (joined
+              (portRef D1 (instanceRef mux_7))
+              (portRef DOA6 (instanceRef internal_datamem_32_1_1_0))))
+          (net mdout0_0_24
+            (joined
+              (portRef D0 (instanceRef mux_7))
+              (portRef DOA6 (instanceRef internal_datamem_32_0_2_3))))
+          (net mdout0_1_25
+            (joined
+              (portRef D1 (instanceRef mux_6))
+              (portRef DOA7 (instanceRef internal_datamem_32_1_1_0))))
+          (net mdout0_0_25
+            (joined
+              (portRef D0 (instanceRef mux_6))
+              (portRef DOA7 (instanceRef internal_datamem_32_0_2_3))))
+          (net mdout0_1_26
+            (joined
+              (portRef D1 (instanceRef mux_5))
+              (portRef DOA8 (instanceRef internal_datamem_32_1_1_0))))
+          (net mdout0_0_26
+            (joined
+              (portRef D0 (instanceRef mux_5))
+              (portRef DOA8 (instanceRef internal_datamem_32_0_2_3))))
+          (net mdout0_1_27
+            (joined
+              (portRef D1 (instanceRef mux_4))
+              (portRef DOA9 (instanceRef internal_datamem_32_1_1_0))))
+          (net mdout0_0_27
+            (joined
+              (portRef D0 (instanceRef mux_4))
+              (portRef DOA0 (instanceRef internal_datamem_32_0_3_2))))
+          (net mdout0_1_28
+            (joined
+              (portRef D1 (instanceRef mux_3))
+              (portRef DOA10 (instanceRef internal_datamem_32_1_1_0))))
+          (net mdout0_0_28
+            (joined
+              (portRef D0 (instanceRef mux_3))
+              (portRef DOA1 (instanceRef internal_datamem_32_0_3_2))))
+          (net mdout0_1_29
+            (joined
+              (portRef D1 (instanceRef mux_2))
+              (portRef DOA11 (instanceRef internal_datamem_32_1_1_0))))
+          (net mdout0_0_29
+            (joined
+              (portRef D0 (instanceRef mux_2))
+              (portRef DOA2 (instanceRef internal_datamem_32_0_3_2))))
+          (net mdout0_1_30
+            (joined
+              (portRef D1 (instanceRef mux_1))
+              (portRef DOA12 (instanceRef internal_datamem_32_1_1_0))))
+          (net mdout0_0_30
+            (joined
+              (portRef D0 (instanceRef mux_1))
+              (portRef DOA3 (instanceRef internal_datamem_32_0_3_2))))
+          (net addr11_ff
+            (joined
+              (portRef SD (instanceRef mux_0))
+              (portRef Q (instanceRef FF_0))
+              (portRef SD (instanceRef mux_31))
+              (portRef SD (instanceRef mux_30))
+              (portRef SD (instanceRef mux_29))
+              (portRef SD (instanceRef mux_28))
+              (portRef SD (instanceRef mux_27))
+              (portRef SD (instanceRef mux_26))
+              (portRef SD (instanceRef mux_25))
+              (portRef SD (instanceRef mux_24))
+              (portRef SD (instanceRef mux_23))
+              (portRef SD (instanceRef mux_22))
+              (portRef SD (instanceRef mux_21))
+              (portRef SD (instanceRef mux_20))
+              (portRef SD (instanceRef mux_19))
+              (portRef SD (instanceRef mux_18))
+              (portRef SD (instanceRef mux_17))
+              (portRef SD (instanceRef mux_16))
+              (portRef SD (instanceRef mux_15))
+              (portRef SD (instanceRef mux_14))
+              (portRef SD (instanceRef mux_13))
+              (portRef SD (instanceRef mux_12))
+              (portRef SD (instanceRef mux_11))
+              (portRef SD (instanceRef mux_10))
+              (portRef SD (instanceRef mux_9))
+              (portRef SD (instanceRef mux_8))
+              (portRef SD (instanceRef mux_7))
+              (portRef SD (instanceRef mux_6))
+              (portRef SD (instanceRef mux_5))
+              (portRef SD (instanceRef mux_4))
+              (portRef SD (instanceRef mux_3))
+              (portRef SD (instanceRef mux_2))
+              (portRef SD (instanceRef mux_1))))
+          (net mdout0_1_31
+            (joined
+              (portRef D1 (instanceRef mux_0))
+              (portRef DOA13 (instanceRef internal_datamem_32_1_1_0))))
+          (net mdout0_0_31
+            (joined
+              (portRef D0 (instanceRef mux_0))
+              (portRef DOA4 (instanceRef internal_datamem_32_0_3_2))))
+          (net dataout31
+            (joined
+              (portRef (member Q 0))
+              (portRef Z (instanceRef mux_0))))
+          (net dataout30
+            (joined
+              (portRef (member Q 1))
+              (portRef Z (instanceRef mux_1))))
+          (net dataout29
+            (joined
+              (portRef (member Q 2))
+              (portRef Z (instanceRef mux_2))))
+          (net dataout28
+            (joined
+              (portRef (member Q 3))
+              (portRef Z (instanceRef mux_3))))
+          (net dataout27
+            (joined
+              (portRef (member Q 4))
+              (portRef Z (instanceRef mux_4))))
+          (net dataout26
+            (joined
+              (portRef (member Q 5))
+              (portRef Z (instanceRef mux_5))))
+          (net dataout25
+            (joined
+              (portRef (member Q 6))
+              (portRef Z (instanceRef mux_6))))
+          (net dataout24
+            (joined
+              (portRef (member Q 7))
+              (portRef Z (instanceRef mux_7))))
+          (net dataout23
+            (joined
+              (portRef (member Q 8))
+              (portRef Z (instanceRef mux_8))))
+          (net dataout22
+            (joined
+              (portRef (member Q 9))
+              (portRef Z (instanceRef mux_9))))
+          (net dataout21
+            (joined
+              (portRef (member Q 10))
+              (portRef Z (instanceRef mux_10))))
+          (net dataout20
+            (joined
+              (portRef (member Q 11))
+              (portRef Z (instanceRef mux_11))))
+          (net dataout19
+            (joined
+              (portRef (member Q 12))
+              (portRef Z (instanceRef mux_12))))
+          (net dataout18
+            (joined
+              (portRef (member Q 13))
+              (portRef Z (instanceRef mux_13))))
+          (net dataout17
+            (joined
+              (portRef (member Q 14))
+              (portRef Z (instanceRef mux_14))))
+          (net dataout16
+            (joined
+              (portRef (member Q 15))
+              (portRef Z (instanceRef mux_15))))
+          (net dataout15
+            (joined
+              (portRef (member Q 16))
+              (portRef Z (instanceRef mux_16))))
+          (net dataout14
+            (joined
+              (portRef (member Q 17))
+              (portRef Z (instanceRef mux_17))))
+          (net dataout13
+            (joined
+              (portRef (member Q 18))
+              (portRef Z (instanceRef mux_18))))
+          (net dataout12
+            (joined
+              (portRef (member Q 19))
+              (portRef Z (instanceRef mux_19))))
+          (net dataout11
+            (joined
+              (portRef (member Q 20))
+              (portRef Z (instanceRef mux_20))))
+          (net dataout10
+            (joined
+              (portRef (member Q 21))
+              (portRef Z (instanceRef mux_21))))
+          (net dataout9
+            (joined
+              (portRef (member Q 22))
+              (portRef Z (instanceRef mux_22))))
+          (net dataout8
+            (joined
+              (portRef (member Q 23))
+              (portRef Z (instanceRef mux_23))))
+          (net dataout7
+            (joined
+              (portRef (member Q 24))
+              (portRef Z (instanceRef mux_24))))
+          (net dataout6
+            (joined
+              (portRef (member Q 25))
+              (portRef Z (instanceRef mux_25))))
+          (net dataout5
+            (joined
+              (portRef (member Q 26))
+              (portRef Z (instanceRef mux_26))))
+          (net dataout4
+            (joined
+              (portRef (member Q 27))
+              (portRef Z (instanceRef mux_27))))
+          (net dataout3
+            (joined
+              (portRef (member Q 28))
+              (portRef Z (instanceRef mux_28))))
+          (net dataout2
+            (joined
+              (portRef (member Q 29))
+              (portRef Z (instanceRef mux_29))))
+          (net dataout1
+            (joined
+              (portRef (member Q 30))
+              (portRef Z (instanceRef mux_30))))
+          (net dataout0
+            (joined
+              (portRef (member Q 31))
+              (portRef Z (instanceRef mux_31))))
+          (net datain31
+            (joined
+              (portRef (member Data 0))
+              (portRef DIA4 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA13 (instanceRef internal_datamem_32_1_1_0))))
+          (net datain30
+            (joined
+              (portRef (member Data 1))
+              (portRef DIA3 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA12 (instanceRef internal_datamem_32_1_1_0))))
+          (net datain29
+            (joined
+              (portRef (member Data 2))
+              (portRef DIA2 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA11 (instanceRef internal_datamem_32_1_1_0))))
+          (net datain28
+            (joined
+              (portRef (member Data 3))
+              (portRef DIA1 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA10 (instanceRef internal_datamem_32_1_1_0))))
+          (net datain27
+            (joined
+              (portRef (member Data 4))
+              (portRef DIA0 (instanceRef internal_datamem_32_0_3_2))
+              (portRef DIA9 (instanceRef internal_datamem_32_1_1_0))))
+          (net datain26
+            (joined
+              (portRef (member Data 5))
+              (portRef DIA8 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA8 (instanceRef internal_datamem_32_1_1_0))))
+          (net datain25
+            (joined
+              (portRef (member Data 6))
+              (portRef DIA7 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA7 (instanceRef internal_datamem_32_1_1_0))))
+          (net datain24
+            (joined
+              (portRef (member Data 7))
+              (portRef DIA6 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA6 (instanceRef internal_datamem_32_1_1_0))))
+          (net datain23
+            (joined
+              (portRef (member Data 8))
+              (portRef DIA5 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA5 (instanceRef internal_datamem_32_1_1_0))))
+          (net datain22
+            (joined
+              (portRef (member Data 9))
+              (portRef DIA4 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA4 (instanceRef internal_datamem_32_1_1_0))))
+          (net datain21
+            (joined
+              (portRef (member Data 10))
+              (portRef DIA3 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA3 (instanceRef internal_datamem_32_1_1_0))))
+          (net datain20
+            (joined
+              (portRef (member Data 11))
+              (portRef DIA2 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA2 (instanceRef internal_datamem_32_1_1_0))))
+          (net datain19
+            (joined
+              (portRef (member Data 12))
+              (portRef DIA1 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA1 (instanceRef internal_datamem_32_1_1_0))))
+          (net datain18
+            (joined
+              (portRef (member Data 13))
+              (portRef DIA0 (instanceRef internal_datamem_32_0_2_3))
+              (portRef DIA0 (instanceRef internal_datamem_32_1_1_0))))
+          (net datain17
+            (joined
+              (portRef (member Data 14))
+              (portRef DIA8 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA17 (instanceRef internal_datamem_32_1_0_1))))
+          (net datain16
+            (joined
+              (portRef (member Data 15))
+              (portRef DIA7 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA16 (instanceRef internal_datamem_32_1_0_1))))
+          (net datain15
+            (joined
+              (portRef (member Data 16))
+              (portRef DIA6 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA15 (instanceRef internal_datamem_32_1_0_1))))
+          (net datain14
+            (joined
+              (portRef (member Data 17))
+              (portRef DIA5 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA14 (instanceRef internal_datamem_32_1_0_1))))
+          (net datain13
+            (joined
+              (portRef (member Data 18))
+              (portRef DIA4 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA13 (instanceRef internal_datamem_32_1_0_1))))
+          (net datain12
+            (joined
+              (portRef (member Data 19))
+              (portRef DIA3 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA12 (instanceRef internal_datamem_32_1_0_1))))
+          (net datain11
+            (joined
+              (portRef (member Data 20))
+              (portRef DIA2 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA11 (instanceRef internal_datamem_32_1_0_1))))
+          (net datain10
+            (joined
+              (portRef (member Data 21))
+              (portRef DIA1 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA10 (instanceRef internal_datamem_32_1_0_1))))
+          (net datain9
+            (joined
+              (portRef (member Data 22))
+              (portRef DIA0 (instanceRef internal_datamem_32_0_1_4))
+              (portRef DIA9 (instanceRef internal_datamem_32_1_0_1))))
+          (net datain8
+            (joined
+              (portRef (member Data 23))
+              (portRef DIA8 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA8 (instanceRef internal_datamem_32_1_0_1))))
+          (net datain7
+            (joined
+              (portRef (member Data 24))
+              (portRef DIA7 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA7 (instanceRef internal_datamem_32_1_0_1))))
+          (net datain6
+            (joined
+              (portRef (member Data 25))
+              (portRef DIA6 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA6 (instanceRef internal_datamem_32_1_0_1))))
+          (net datain5
+            (joined
+              (portRef (member Data 26))
+              (portRef DIA5 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA5 (instanceRef internal_datamem_32_1_0_1))))
+          (net datain4
+            (joined
+              (portRef (member Data 27))
+              (portRef DIA4 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA4 (instanceRef internal_datamem_32_1_0_1))))
+          (net datain3
+            (joined
+              (portRef (member Data 28))
+              (portRef DIA3 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA3 (instanceRef internal_datamem_32_1_0_1))))
+          (net datain2
+            (joined
+              (portRef (member Data 29))
+              (portRef DIA2 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA2 (instanceRef internal_datamem_32_1_0_1))))
+          (net datain1
+            (joined
+              (portRef (member Data 30))
+              (portRef DIA1 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA1 (instanceRef internal_datamem_32_1_0_1))))
+          (net datain0
+            (joined
+              (portRef (member Data 31))
+              (portRef DIA0 (instanceRef internal_datamem_32_0_0_5))
+              (portRef DIA0 (instanceRef internal_datamem_32_1_0_1))))
+          (net addr11
+            (joined
+              (portRef (member Address 0))
+              (portRef CSA0 (instanceRef internal_datamem_32_0_0_5))
+              (portRef CSA0 (instanceRef internal_datamem_32_0_1_4))
+              (portRef CSA0 (instanceRef internal_datamem_32_0_2_3))
+              (portRef CSA0 (instanceRef internal_datamem_32_0_3_2))
+              (portRef CSA1 (instanceRef internal_datamem_32_1_0_1))
+              (portRef CSA1 (instanceRef internal_datamem_32_1_1_0))
+              (portRef D (instanceRef FF_0))))
+          (net addr10
+            (joined
+              (portRef (member Address 1))
+              (portRef ADA13 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADA13 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADA13 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADA13 (instanceRef internal_datamem_32_0_3_2))
+              (portRef CSA0 (instanceRef internal_datamem_32_1_0_1))
+              (portRef CSA0 (instanceRef internal_datamem_32_1_1_0))))
+          (net addr9
+            (joined
+              (portRef (member Address 2))
+              (portRef ADA12 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADA12 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADA12 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADA12 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADA13 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADA13 (instanceRef internal_datamem_32_1_1_0))))
+          (net addr8
+            (joined
+              (portRef (member Address 3))
+              (portRef ADA11 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADA11 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADA11 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADA11 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADA12 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADA12 (instanceRef internal_datamem_32_1_1_0))))
+          (net addr7
+            (joined
+              (portRef (member Address 4))
+              (portRef ADA10 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADA10 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADA10 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADA10 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADA11 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADA11 (instanceRef internal_datamem_32_1_1_0))))
+          (net addr6
+            (joined
+              (portRef (member Address 5))
+              (portRef ADA9 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADA9 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADA9 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADA9 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADA10 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADA10 (instanceRef internal_datamem_32_1_1_0))))
+          (net addr5
+            (joined
+              (portRef (member Address 6))
+              (portRef ADA8 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADA8 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADA8 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADA8 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADA9 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADA9 (instanceRef internal_datamem_32_1_1_0))))
+          (net addr4
+            (joined
+              (portRef (member Address 7))
+              (portRef ADA7 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADA7 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADA7 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADA7 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADA8 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADA8 (instanceRef internal_datamem_32_1_1_0))))
+          (net addr3
+            (joined
+              (portRef (member Address 8))
+              (portRef ADA6 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADA6 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADA6 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADA6 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADA7 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADA7 (instanceRef internal_datamem_32_1_1_0))))
+          (net addr2
+            (joined
+              (portRef (member Address 9))
+              (portRef ADA5 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADA5 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADA5 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADA5 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADA6 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADA6 (instanceRef internal_datamem_32_1_1_0))))
+          (net addr1
+            (joined
+              (portRef (member Address 10))
+              (portRef ADA4 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADA4 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADA4 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADA4 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADA5 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADA5 (instanceRef internal_datamem_32_1_1_0))))
+          (net addr0
+            (joined
+              (portRef (member Address 11))
+              (portRef ADA3 (instanceRef internal_datamem_32_0_0_5))
+              (portRef ADA3 (instanceRef internal_datamem_32_0_1_4))
+              (portRef ADA3 (instanceRef internal_datamem_32_0_2_3))
+              (portRef ADA3 (instanceRef internal_datamem_32_0_3_2))
+              (portRef ADA4 (instanceRef internal_datamem_32_1_0_1))
+              (portRef ADA4 (instanceRef internal_datamem_32_1_1_0))))
+          (net wren
+            (joined
+              (portRef WE)
+              (portRef A (instanceRef INV_0))
+              (portRef WEA (instanceRef internal_datamem_32_0_0_5))
+              (portRef WEA (instanceRef internal_datamem_32_0_1_4))
+              (portRef WEA (instanceRef internal_datamem_32_0_2_3))
+              (portRef WEA (instanceRef internal_datamem_32_0_3_2))
+              (portRef WEA (instanceRef internal_datamem_32_1_0_1))
+              (portRef WEA (instanceRef internal_datamem_32_1_1_0))))
+          (net Reset
+            (joined
+              (portRef Reset)
+              (portRef RSTA (instanceRef internal_datamem_32_0_0_5))
+              (portRef RSTA (instanceRef internal_datamem_32_0_1_4))
+              (portRef RSTA (instanceRef internal_datamem_32_0_2_3))
+              (portRef RSTA (instanceRef internal_datamem_32_0_3_2))
+              (portRef RSTA (instanceRef internal_datamem_32_1_0_1))
+              (portRef RSTA (instanceRef internal_datamem_32_1_1_0))))
+          (net ClockEn
+            (joined
+              (portRef ClockEn)
+              (portRef B (instanceRef AND2_t0))
+              (portRef CEA (instanceRef internal_datamem_32_0_0_5))
+              (portRef CEA (instanceRef internal_datamem_32_0_1_4))
+              (portRef CEA (instanceRef internal_datamem_32_0_2_3))
+              (portRef CEA (instanceRef internal_datamem_32_0_3_2))
+              (portRef CEA (instanceRef internal_datamem_32_1_0_1))
+              (portRef CEA (instanceRef internal_datamem_32_1_1_0))))
+          (net clk
+            (joined
+              (portRef Clock)
+              (portRef CLKA (instanceRef internal_datamem_32_0_0_5))
+              (portRef CLKA (instanceRef internal_datamem_32_0_1_4))
+              (portRef CLKA (instanceRef internal_datamem_32_0_2_3))
+              (portRef CLKA (instanceRef internal_datamem_32_0_3_2))
+              (portRef CLKA (instanceRef internal_datamem_32_1_0_1))
+              (portRef CLKA (instanceRef internal_datamem_32_1_1_0))
+              (portRef CK (instanceRef FF_0))))))))
+  (design internal_datamem_32
+    (cellRef internal_datamem_32
+      (libraryRef ORCLIB)))
+)

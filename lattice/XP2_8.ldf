@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BaliProject version="3.2" title="XP2_8" device="LFXP2-8E-5QN208C" default_implementation="lattice">
+    <Options/>
+    <Implementation title="lattice" dir="./" description="lattice" synthesis="synplify" default_strategy="Strategy1">
+        <Options def_top="fpga" top="fpga"/>
+        <Source name="../synplify/core_lattice.edn" type="EDIF" type_short="EDIF">
+            <Options/>
+        </Source>
+        <Source name="XP2_8.lpf" type="Logic Preference" type_short="LPF">
+            <Options/>
+        </Source>
+    </Implementation>
+    <Strategy name="Strategy1" file="XP2_81.sty"/>
+</BaliProject>

@@ -1,0 +1,33 @@
+SCUBA, Version Diamond (64-bit) 3.10.3.144
+Wed Apr 22 18:22:23 2020
+  
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2017 Lattice Semiconductor Corporation,  All rights reserved.
+  
+BEGIN SCUBA Module Synthesis
+  
+    Issued command   : C:\lscc\diamond\3.10_x64\ispfpga\bin\nt64\scuba.exe -w -n internal_datamem_18 -lang vhdl -synth synplify -bus_exp 7 -bb -arch mg5a00 -type ramdp -device LFXP2-8E -aaddr_width 13 -widtha 18 -baddr_width 13 -widthb 18 -anum_words 6144 -bnum_words 6144 -writemodeA NORMAL -writemodeB NORMAL -resetmode SYNC -cascade -1 
+    Circuit name     : internal_datamem_18
+    Module type      : RAM_DP_TRUE
+    Module Version   : 7.5
+    Ports            : 
+    Inputs       : DataInA[17:0], DataInB[17:0], AddressA[12:0], AddressB[12:0], ClockA, ClockB, ClockEnA, ClockEnB, WrA, WrB, ResetA, ResetB
+    Outputs      : QA[17:0], QB[17:0]
+    I/O buffer       : not inserted
+    EDIF output      : internal_datamem_18.edn
+    VHDL output      : internal_datamem_18.vhd
+    VHDL template    : internal_datamem_18_tmpl.vhd
+    VHDL testbench   : tb_internal_datamem_18_tmpl.vhd
+    VHDL purpose     : for synthesis and simulation
+    Bus notation     : big endian
+    Report output    : internal_datamem_18.srp
+    Estimated Resource Usage:
+            LUT : 38
+            EBR : 6
+            Reg : 4
+  
+END   SCUBA Module Synthesis
+

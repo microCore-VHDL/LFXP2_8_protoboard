@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DiamondModule name="internal_datamem_18" module="internal_datamem_18" VendorName="Lattice Semiconductor Corporation" generator="IPexpress" date="2020 04 22 18:22:26.068" version="7.5" type="Module" synthesis="synplify" source_format="VHDL">
+  <Package>
+		<File name="" type="" modified="2020 04 22 18:22:25.840"/>
+		<File name="internal_datamem_18.lpc" type="lpc" modified="2020 04 22 18:22:23.624"/>
+		<File name="internal_datamem_18.vhd" type="top_level_vhdl" modified="2020 04 22 18:22:23.684"/>
+		<File name="internal_datamem_18_tmpl.vhd" type="template_vhdl" modified="2020 04 22 18:22:23.684"/>
+		<File name="tb_internal_datamem_18_tmpl.vhd" type="testbench_vhdl" modified="2020 04 22 18:22:23.688"/>
+  </Package>
+</DiamondModule>
