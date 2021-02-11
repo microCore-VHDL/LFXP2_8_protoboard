@@ -2,10 +2,10 @@
 \ @file : vhdl.fs
 \ ----------------------------------------------------------------------
 \
-\ Last change: KS 06.01.2021 18:20:18
+\ Last change: KS 09.02.2021 22:46:39
 \ Project : microCore
 \ Language : gforth_0.6.2
-\ Last check in : $Rev: 615 $ $Date:: 2021-01-17 #$
+\ Last check in : $Rev: 643 $ $Date:: 2021-02-11 #$
 \ @copyright (c): Free Software Foundation
 \ @original author: ks - Klaus Schleisiek
 \
@@ -69,6 +69,8 @@ Vocabulary --VHDL   --VHDL definitions
 1 Constant INTEGER
 2 Constant BOOLEAN
 
+: STD_LOGIC_VECTOR  ( -- type )  postpone ( byte ;    \ )
+
 : CONSTANT  ( -- )   0 Constant ;
 
 : vhdl-types  ( type -- n )
@@ -76,8 +78,6 @@ Vocabulary --VHDL   --VHDL definitions
    2 case? IF  [char] ; word count evaluate  EXIT THEN  \ for conditional compilation
    abort" unknown type"
 ;
-: STD_LOGIC_VECTOR  ( -- type )  postpone ( byte ;    \ )
-
 : :=      ( type -- )   Base save  vhdl-types   here cell- ! ; \ patch constant created before
 
 : --~     ( ccc~ -- )   [char] ~ scan-input ;         \ ~
