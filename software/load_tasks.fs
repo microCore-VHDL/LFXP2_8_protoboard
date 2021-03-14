@@ -1,5 +1,5 @@
 \
-\ Last change: KS 13.12.2020 16:22:02
+\ Last change: KS 13.03.2021 19:11:16
 \ Last check in : $Rev: 587 $ $Date:: 2020-11-12 #$
 \
 \ MicroCore load screen to test all aspects of the multitasker.
@@ -115,7 +115,7 @@ init: init-tasks     ( -- )
 ;
 init: init-leds  ( -- )   0 Leds ! ;
 
-: boot  ( -- )   0 #cache erase   CALL initialization   debugService ;
+: boot  ( -- )   0 #cache erase   CALL initialization   debug-service ;
 
 #reset TRAP: rst    ( -- )            boot              ;  \ compile branch to boot at reset vector location
 #isr   TRAP: isr    ( -- )            interrupt IRET    ;

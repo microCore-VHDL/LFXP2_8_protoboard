@@ -1,6 +1,6 @@
 \
-\ Last change: KS 13.12.2020 16:14:13
-\ Last check in : $Rev: 623 $ $Date:: 2021-01-20 #$
+\ Last change: KS 13.03.2021 19:11:37
+\ Last check in : $Rev: 667 $ $Date:: 2021-03-14 #$
 \
 \ MicroCore load screen for execution on the target.
 \ Floating point library package.
@@ -70,7 +70,7 @@ B-factor -T0 f/ R0 fln f+ fexp Constant R-lim
 
 init: init-leds  ( -- )   0 Leds ! ;
 
-: boot  ( -- )   0 #cache erase   CALL initialization   debugService ;
+: boot  ( -- )   0 #cache erase   CALL initialization   debug-service ;
 
 #reset TRAP: rst    ( -- )            boot              ;  \ compile branch to boot at reset vector location
 #isr   TRAP: isr    ( -- )            di IRET           ;

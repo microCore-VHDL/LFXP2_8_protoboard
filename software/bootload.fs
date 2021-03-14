@@ -2,10 +2,10 @@
 \ @file : bootload.fs
 \ ----------------------------------------------------------------------
 \
-\ Last change: KS 20.06.2020 16:26:58
+\ Last change: KS 13.03.2021 19:19:50
 \ Project : microCore
 \ Language : gforth_0.6.2
-\ Last check in : $Rev: 587 $ $Date:: 2020-11-12 #$
+\ Last check in : $Rev: 667 $ $Date:: 2021-03-14 #$
 \ @copyright (c): Free Software Foundation
 \ @original author: ks - Klaus Schleisiek
 \
@@ -26,7 +26,7 @@
 \          configured and it blinks the 8 LEDS of the XP2 board
 \
 \ Version Author   Date       Changes
-\           ks   14-Jun-2020  initial version
+\   210     ks   14-Jun-2020  initial version
 \ ----------------------------------------------------------------------
 Only Forth also definitions 
 

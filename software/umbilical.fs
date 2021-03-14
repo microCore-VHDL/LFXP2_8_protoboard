@@ -2,7 +2,7 @@
 \ @file : umbilical.fs
 \ ----------------------------------------------------------------------
 \
-\ Last change: KS 11.02.2021 18:51:56
+\ Last change: KS 14.06.2020 17:06:56
 \ Project : microCore
 \ Language : gforth_0.6.2
 \ Last check in : $Rev: 562 $ $Date:: 2020-06-15 #$
@@ -27,7 +27,7 @@
 \          rs232 interface used.
 \
 \ Version Author   Date       Changes
-\           ks   14-Jun-2020  initial version
+\   210     ks   14-Jun-2020  initial version
 \ ----------------------------------------------------------------------
 SIMULATION [NOTIF]
 

@@ -1,6 +1,6 @@
 \ 
-\ Last change: KS 13.12.2020 16:15:33
-\ Last check in : $Rev: 612 $ $Date:: 2020-12-16 #$
+\ Last change: KS 13.03.2021 19:11:32
+\ Last check in : $Rev: 667 $ $Date:: 2021-03-14 #$
 \
 \ MicroCore load screen for the core test program that is transferred
 \ into the program memory via the debug umbilical
@@ -67,7 +67,7 @@ Variable Divisor
 : boot  ( -- )
    0 #cache erase  CALL initialization
    Terminal Tester ['] test spawn
-   debugService
+   debug-service
 ;
 
 #reset TRAP: rst    ( -- )            boot              ;  \ compile branch to boot at reset vector location

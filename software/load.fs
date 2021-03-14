@@ -1,6 +1,6 @@
 \
-\ Last change: KS 21.01.2021 17:05:38
-\ Last check in : $Rev: 627 $ $Date:: 2021-01-21 #$
+\ Last change: KS 13.03.2021 19:11:06
+\ Last check in : $Rev: 667 $ $Date:: 2021-03-14 #$
 \
 \ Basic microCore load screen for execution on the target.
 \
@@ -42,7 +42,7 @@ init: init-int  ( -- )  #i-time int-enable ei ;
 
 init: init-leds ( -- )  0 Leds ! ;
 
-: boot  ( -- )   0 #cache erase   CALL initialization   debugService ;
+: boot  ( -- )   0 #cache erase   CALL initialization   debug-service ;
 
 #reset TRAP: rst    ( -- )            boot              ;  \ compile branch to boot at reset vector location
 #isr   TRAP: isr    ( -- )            interrupt IRET    ;

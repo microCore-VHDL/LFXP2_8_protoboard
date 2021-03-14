@@ -1,6 +1,6 @@
 \ 
-\ Last change: KS 13.12.2020 16:16:08
-\ Last check in : $Rev: 612 $ $Date:: 2020-12-16 #$
+\ Last change: KS 13.03.2021 19:11:34
+\ Last check in : $Rev: 667 $ $Date:: 2021-03-14 #$
 \
 \ MicroCore load screen for the core test program that is transferred
 \ into the program memory via the debug umbilical
@@ -23,7 +23,7 @@ Target new initialized          \ go into target compilation mode and initialize
 include constants.fs            \ MicroCore Register addresses and bits
 include debugger.fs
 library forth_lib.fs
-library task.lib.fs
+include task_lib.fs
 
 \ --------------------------------------------------------------------------------
 \ Test routines for signed division, truncated to a reduced data width
@@ -39,7 +39,7 @@ Variable Dividend
 Variable Divisor
 Variable Errors
 Variable Ambiguous
-Create Field     \ must be last Create with empty space until #extern
+Create Field     \ must be last Create with empty space until #cache
 
 : blink       ( -- )      Leds @ $80 xor Leds ! ;
 
@@ -57,9 +57,10 @@ Create Field     \ must be last Create with empty space until #extern
    Divisor @ Dividend @ Ptr @ st 1+ st 1+
    dup #cache u> IF  $FF Leds !  halt  THEN  Ptr !
 ;
-: divtest  ( -- )   0 Leds !
-   #signbit 2* 0 DO  I Dividend !   I $F and 0= IF blink THEN
-       #divisor 0 DO  pause I Divisor !  checkdiv  LOOP
+: divtest  ( -- )
+   0 Leds !   #signbit 2* 0
+   DO  I Dividend !   I $3F and 0= IF blink THEN
+      #divisor 0 DO  pause I Divisor !  checkdiv  LOOP
    LOOP
    $55 Leds !  halt
 ;
@@ -73,7 +74,7 @@ Create Field     \ must be last Create with empty space until #extern
 \ booting and traps
 \ --------------------------------------------------------------------------------
 
-: boot  ( -- )   0 #cache erase   CALL initialization   debugService ;
+: boot  ( -- )   0 #cache erase   CALL initialization   debug-service ;
 
 #reset TRAP: rst    ( -- )            boot              ;  \ compile branch to boot at reset vector location
 #isr   TRAP: isr    ( -- )            di IRET           ;

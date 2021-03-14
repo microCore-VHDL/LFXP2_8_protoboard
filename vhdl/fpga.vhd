@@ -2,10 +2,10 @@
 -- @file : fpga.vhd for the Lattice XP2 Demoboard
 -- ---------------------------------------------------------------------
 --
--- Last change: KS 24.01.2021 19:51:19
+-- Last change: KS 10.03.2021 16:29:31
 -- Project : microCore
 -- Language : VHDL-2008
--- Last check in : $Rev: 612 $ $Date:: 2020-12-16 #$
+-- Last check in : $Rev: 664 $ $Date:: 2021-03-10 #$
 -- @copyright (c): Klaus Schleisiek, All Rights Reserved.
 --
 -- Do not use this file except in compliance with the License.
@@ -21,7 +21,8 @@
 --         like e.g. pad assignments and it is the source of the uBus.
 --
 -- Version Author   Date       Changes
---           ks    8-Jun-2020  initial version
+--   210     ks    8-Jun-2020  initial version
+--  2300     ks    8-Mar-2021  converted to NUMERIC_STD
 -- ---------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
@@ -34,15 +35,15 @@ ENTITY fpga IS PORT (
    clock       : IN    STD_LOGIC; -- external clock input
 -- Demoboard specific pins
    int_n       : IN    STD_LOGIC; -- external interrupt input
-   io          : OUT   STD_LOGIC_VECTOR(17 DOWNTO 0);
-   leds_n      : OUT   STD_LOGIC_VECTOR(7 DOWNTO 0);
-   switch_n    : IN    STD_LOGIC_VECTOR(3 DOWNTO 0);
+   io          : OUT   UNSIGNED(17 DOWNTO 0);
+   leds_n      : OUT   byte;
+   switch_n    : IN    UNSIGNED(3 DOWNTO 0);
 -- external SRAM
    ce_n        : OUT   STD_LOGIC;
    oe_n        : OUT   STD_LOGIC;
    we_n        : OUT   STD_LOGIC;
-   addr        : OUT   STD_LOGIC_VECTOR(mem_addr_width-1 DOWNTO 0);
-   data        : INOUT STD_LOGIC_VECTOR(mem_data_width-1 DOWNTO 0);
+   addr        : OUT   UNSIGNED(mem_addr_width-1 DOWNTO 0);
+   data        : INOUT UNSIGNED(ext_data_width-1 DOWNTO 0);
 -- umbilical uart for debugging
    dsu_rxd     : IN    STD_LOGIC;  -- incoming asynchronous data stream
    dsu_txd     : OUT   STD_LOGIC   -- outgoing data stream
@@ -120,7 +121,7 @@ COMPONENT microcore PORT (
 SIGNAL core         : core_signals;
 SIGNAL flags        : flag_bus;
 SIGNAL flags_pause  : STD_LOGIC;
-SIGNAL ctrl         : STD_LOGIC_VECTOR(ctrl_width-1 DOWNTO 0);
+SIGNAL ctrl         : UNSIGNED(ctrl_width-1 DOWNTO 0);
 SIGNAL ext_memory   : datamem_port;
 SIGNAL ext_rdata    : data_bus;
 SIGNAL dma          : datamem_port;
@@ -128,7 +129,7 @@ SIGNAL dma_rdata    : data_bus;
 
 COMPONENT external_SRAM GENERIC (
    mem_addr_width : NATURAL;
-   mem_data_width : NATURAL;
+   ext_data_width : NATURAL;
    delay_cnt      : NATURAL    -- delay_cnt+1 extra clock cycles for each memory access
 ); PORT (
    uBus        : IN    uBus_port;
@@ -140,14 +141,14 @@ COMPONENT external_SRAM GENERIC (
    ce_n        : OUT   STD_LOGIC;
    oe_n        : OUT   STD_LOGIC;
    we_n        : OUT   STD_LOGIC;
-   addr        : OUT   STD_LOGIC_VECTOR(mem_addr_width-1 DOWNTO 0);
-   data        : INOUT STD_LOGIC_VECTOR(mem_data_width-1 DOWNTO 0)
+   addr        : OUT   UNSIGNED(mem_addr_width-1 DOWNTO 0);
+   data        : INOUT UNSIGNED(ext_data_width-1 DOWNTO 0)
 ); END COMPONENT external_SRAM;
 
 SIGNAL SRAM_delay   : STD_LOGIC;
 SIGNAL leds         : byte;
 SIGNAL time_int     : STD_LOGIC;
-SIGNAL ioreg        : STD_LOGIC_VECTOR(14 DOWNTO 0);
+SIGNAL ioreg        : UNSIGNED(14 DOWNTO 0);
 
 BEGIN
 
@@ -171,8 +172,6 @@ clk <= clock;
 -- ctrl-register (bitwise)
 -- ---------------------------------------------------------------------
 
-with_ctrl: IF  ctrl_width /= 0 GENERATE
-
 ctrl_proc: PROCESS (reset, clk)
 BEGIN
    IF  reset = '1' AND async_reset  THEN
@@ -180,8 +179,8 @@ BEGIN
    ELSIF  rising_edge(clk)  THEN
       IF  uReg_write(uBus, CTRL_REG)  THEN
          IF  uBus.wdata(signbit) = '0'  THEN
-               ctrl <= ctrl OR  uBus.wdata(ctrl'high DOWNTO 0);
-         ELSE  ctrl <= ctrl AND uBus.wdata(ctrl'high DOWNTO 0);
+               ctrl <= ctrl OR  uBus.wdata(ctrl'range);
+         ELSE  ctrl <= ctrl AND uBus.wdata(ctrl'range);
          END IF;
       END IF;
       IF  reset = '1' AND NOT async_reset  THEN
@@ -192,13 +191,7 @@ END PROCESS ctrl_proc;
 
 flags(f_bitout) <= ctrl(c_bitout);
 
-END GENERATE with_ctrl; no_ctrl: IF  ctrl_width = 0  GENERATE
-
-   ctrl <= (OTHERS => '0');
-
-END GENERATE no_ctrl;
-
-uBus.sources(CTRL_REG) <= slice('0', data_width - ctrl_width) & ctrl;
+uBus.sources(CTRL_REG) <= resize(ctrl, data_width);
 
 -- ---------------------------------------------------------------------
 -- software semaphor f_sema using flag register
@@ -221,7 +214,7 @@ BEGIN
 END PROCESS sema_proc;
 
 flags_pause <= '1' WHEN  uReg_write(uBus, FLAG_REG) AND uBus.wdata(signbit) = '0' AND
-                         (uBus.wdata(flag_width-1 DOWNTO 0) AND flags) /= slice('0', flag_width)
+                         unsigned(uBus.wdata(flag_width-1 DOWNTO 0) AND flags) /= 0
                ELSE  '0';
 
 -- ---------------------------------------------------------------------
@@ -257,16 +250,16 @@ uBus.pause                <= flags_pause;
 uBus.delay                <= SRAM_delay;
 uBus.tick                 <= core.tick;
 -- registers
-uBus.sources(STATUS_REG)  <= slice('0', data_width - status_width) & core.status;
-uBus.sources(DSP_REG)     <= slice('0', data_width - dsp_width) & core.dsp;
+uBus.sources(STATUS_REG)  <= resize(core.status, data_width);
+uBus.sources(DSP_REG)     <= resize(core.dsp, data_width);
 uBus.sources(RSP_REG)     <= addr_rstack_v(data_width-1 DOWNTO rsp_width) & core.rsp;
-uBus.sources(INT_REG)     <= slice('0', data_width - interrupts) & core.int;
-uBus.sources(FLAG_REG)    <= slice('0', data_width - flag_width) & flags;
-uBus.sources(VERSION_REG) <= to_vec(version, data_width);
+uBus.sources(INT_REG)     <= resize(core.int, data_width);
+uBus.sources(FLAG_REG)    <= resize(flags, data_width);
+uBus.sources(VERSION_REG) <= to_unsigned(version, data_width);
 uBus.sources(DEBUG_REG)   <= core.debug;
 uBus.sources(TIME_REG)    <= core.time;
-uBus.sources(LED_REG)     <= slice('0', data_width - 8) & leds;
-uBus.sources(IO_REG)      <= slice('0', data_width - 15) & ioreg;
+uBus.sources(LED_REG)     <= resize(leds, data_width);
+uBus.sources(IO_REG)      <= resize(ioreg, data_width);
 -- data memory and return stack
 uBus.reg_en               <= core.reg_en;
 uBus.reg_addr             <= core.reg_addr;
@@ -298,7 +291,8 @@ BEGIN
    END IF;
 END PROCESS ioreg_proc;
 
-leds_n <= NOT leds;
+leds_n(leds_n'high DOWNTO 1) <= NOT leds(leds_n'high DOWNTO 1);
+leds_n(0) <= NOT Ctrl(c_bitout) WHEN  SIMULATION  ELSE  NOT leds(0);
 
 led_proc: PROCESS (reset, clk)
 BEGIN
@@ -340,7 +334,7 @@ flags(i_time) <= time_int;
 with_ext_mem: IF  data_addr_width > cache_addr_width  GENERATE
 
    SRAM: external_SRAM
-   GENERIC MAP (mem_addr_width, mem_data_width, 2)
+   GENERIC MAP (mem_addr_width, ext_data_width, 2)
    PORT MAP (
       uBus        => uBus,
       enable      => ext_memory.enable,
@@ -360,10 +354,10 @@ END GENERATE with_ext_mem; no_ext_mem: IF  data_addr_width <= cache_addr_width  
    ext_rdata  <= (OTHERS => '0');
    SRAM_delay <= '0';
 
-   ce_n <= 'Z';
-   we_n <= 'Z';
-   oe_n <= 'Z';
-   addr <= (OTHERS => 'Z');
+   ce_n <= '1';
+   we_n <= '1';
+   oe_n <= '1';
+   addr <= (OTHERS => '0');
    data <= (OTHERS => 'Z');
 
 END GENERATE no_ext_mem;

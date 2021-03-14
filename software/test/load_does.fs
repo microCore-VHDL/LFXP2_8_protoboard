@@ -1,6 +1,6 @@
 \ 
-\ Last change: KS 13.12.2020 16:16:10
-\ Last check in : $Rev: 612 $ $Date:: 2020-12-16 #$
+\ Last change: KS 13.03.2021 19:11:36
+\ Last check in : $Rev: 667 $ $Date:: 2021-03-14 #$
 \
 \ MicroCore load screen for testing Create ... Does
 \
@@ -29,7 +29,10 @@ Variable Link  0 Link !
 
 Host: Object ( n -- )   T Create  ,  here Link @ , Link !  Does> @ ;
 
-Host: .objects  ( -- )  T Link H dbg? IF  t>  THEN BEGIN  t_@ dup 2 - . ?dup 0= UNTIL ;
+Host: .objects  ( -- )
+       T Link H dbg? IF  t>  THEN
+       BEGIN  t_@ ?dup WHILE  dup 1- t_@ .  REPEAT
+    ;
 
 $1234 Object Dies
 $4321 Object Das
@@ -47,7 +50,7 @@ Variable Ticker  0 Ticker !
 ;
 init: init-does  ( -- )  0 Leds !  #i-time int-enable ei ;
 
-: boot  ( -- )   0 #cache erase   CALL initialization   debugService ;
+: boot  ( -- )   0 #cache erase   CALL initialization   debug-service ;
 
 #reset TRAP: rst    ( -- )            boot              ;  \ compile branch to boot at reset vector location
 #isr   TRAP: isr    ( -- )            interrupt IRET    ;

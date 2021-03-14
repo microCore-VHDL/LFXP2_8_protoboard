@@ -2,10 +2,10 @@
 \ @file : coretest.fs
 \ ----------------------------------------------------------------------
 \
-\ Last change: KS 21.01.2021 22:19:27
+\ Last change: KS 10.03.2021 18:32:47
 \ Project : microCore
 \ Language : gforth_0.6.2
-\ Last check in : $Rev: 628 $ $Date:: 2021-01-21 #$
+\ Last check in : $Rev: 656 $ $Date:: 2021-03-06 #$
 \ @copyright (c): Free Software Foundation
 \ @original author: ks - Klaus Schleisiek
 \
@@ -27,7 +27,8 @@
 \          and "Message <errno>" on the first error.
 \
 \ Version Author   Date       Changes
-\           ks   14-Jun-2020  initial version
+\   210     ks   14-Jun-2020  initial version
+\   2300    ks   18-Feb-2021  compiler switch WITH_PROG_RW eliminated
 \ ----------------------------------------------------------------------
 SIMULATION [IF]  \ simulating
 
@@ -167,6 +168,7 @@ with_mult with_float and [IF]
    &17 data_width - Constant above16
    
    : test-float  ( -- )
+   [ H data_width &18 > T ] [IF]
       $8001 0 normalize   above16 -        IF  $207 finis THEN
       #signbit u2/ xor   above16 shift 1-  IF  $208 finis THEN
       1 float float> ashift 1-             IF  $209 finis THEN
@@ -184,6 +186,7 @@ with_mult with_float and [IF]
       #signbit dup >r sqrt dup * + r@ -    IF  $215 finis THEN
       r> u2/   dup >r sqrt dup * + r@ -    IF  $216 finis THEN
       r> 1-    dup >r sqrt dup * + r> -    IF  $217 finis THEN
+   [THEN]
    ;
 [ELSE]
 
@@ -217,6 +220,11 @@ $5A5 Constant ovfl-pattern
    0 Location !
    1 Location +!  Location @ 1-          IF  $32 finis THEN
    -1 Location +! Location @             IF  $33 finis THEN
+[ H data_addr_width cache_addr_width u> T ] [IF]
+   #8001 #extern st @ #8001 -            IF  $34 finis THEN
+   -1 #extern +!   #extern @ #8000 -     IF  $35 finis THEN
+    1 #extern +!   #extern @ #8001 -     IF  $36 finis THEN
+[THEN]
 ;
 : modify  ( n -- /n )  0= ;
 
@@ -279,10 +287,10 @@ $5A5 Constant ovfl-pattern
 : dsp-task! ( u -- )  ds_addr_width shift  dsp-reg or dup Dsp ! drop ;
 
 : test-van-neumann ( -- )
-[ WITH_PROG_RW SIMULATION and ] [IF]
-   $10 pld  over >r   \ internal blockRAM
-   $11 swap  pst  pld
-   rot swap  pst
+[ SIMULATION ] [IF]
+   $10 pLD  over >r   \ internal blockRAM
+   $11 swap  pST  pLD
+   rot swap  pST
    p@ r> -                               IF  $A0 finis THEN
    $11 -                                 IF  $A1 finis THEN
 [THEN]
@@ -354,7 +362,7 @@ Variable save-DSP
    r> r> r> + - IF  $F1 finis  THEN
 SIMULATION [IF]
    Intvar @     IF  $F2 finis  THEN
-   #c-bitout ctrl !
+   #c-bitout Ctrl !
    0 finis
 [THEN]
    $100 finis

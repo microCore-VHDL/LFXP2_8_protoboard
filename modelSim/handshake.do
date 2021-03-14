@@ -7,7 +7,8 @@ add wave -noupdate /bench/myFPGA/clk
 add wave -noupdate /bench/myFPGA/uCore/clk_en
 add wave -noupdate /bench/myFPGA/uCore/uCntrl/r
 add wave -noupdate /bench/myFPGA/uCore/uCntrl/s
-add wave -noupdate /bench/myFPGA/leds
+add wave -noupdate /bench/myFPGA/uCore/uCntrl/pause
+add wave -noupdate /bench/myFPGA/bitout
 add wave -noupdate -divider Sequencer
 add wave -noupdate /bench/myFPGA/uCore/uCntrl/s.lit
 add wave -noupdate /bench/myFPGA/uCore/uCntrl/r.chain

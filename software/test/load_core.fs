@@ -1,6 +1,6 @@
 \ 
-\ Last change: KS 13.12.2020 16:14:09
-\ Last check in : $Rev: 623 $ $Date:: 2021-01-20 #$
+\ Last change: KS 13.03.2021 19:11:28
+\ Last check in : $Rev: 667 $ $Date:: 2021-03-14 #$
 \
 \ MicroCore load screen for the coretest program that is transferred
 \ into the program memory via the umbilical.
@@ -36,7 +36,7 @@ include coretest.fs
 
 init: init-leds  ( -- )   0 Leds ! ;
 
-: boot  ( -- )   0 #cache erase   CALL initialization   debugService ;
+: boot  ( -- )   0 #cache erase   CALL initialization   debug-service ;
 
 #reset TRAP: rst    ( -- )            boot              ;  \ compile branch to boot at reset vector location
 #isr   TRAP: isr    ( -- )            interrupt IRET    ;

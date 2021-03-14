@@ -2,10 +2,10 @@
 -- @file : uDatacache.vhd
 -- ---------------------------------------------------------------------
 --
--- Last change: KS 24.01.2021 19:52:09
+-- Last change: KS 24.01.2021 19:50:24
 -- Project : microCore
 -- Language : VHDL-2008
--- Last check in : $Rev: 612 $ $Date:: 2020-12-16 #$
+-- Last check in : $Rev: 664 $ $Date:: 2021-03-10 #$
 -- @copyright (c): Klaus Schleisiek, All Rights Reserved.
 --
 -- Do not use this file except in compliance with the License.
@@ -20,10 +20,12 @@
 --         Here fpga specific dual port memory IP can be included.
 --
 -- Version Author   Date       Changes
---           ks    8-Jun-2020  initial version
+--   210     ks    8-Jun-2020  initial version
+--  2300     ks    8-Mar-2021  Conversion to NUMERIC_STD
 -- ---------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.NUMERIC_STD.ALL;
 USE work.functions_pkg.ALL;
 USE work.architecture_pkg.ALL;
 
@@ -104,10 +106,13 @@ COMPONENT internal_datamem_32 PORT (
    ClockEn  : IN  STD_LOGIC;
    Reset    : IN  STD_LOGIC;
    WE       : IN  STD_LOGIC;
-   Address  : IN  dcache_addr; -- data_addr_width := 12
-   Data     : IN  data_bus;
-   Q        : OUT data_bus
+   Address  : IN  STD_LOGIC_VECTOR(11 DOWNTO 0);
+   Data     : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
+   Q        : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
 ); END COMPONENT;
+
+SIGNAL slv_rdata      : STD_LOGIC_VECTOR(rdata'range);
+SIGNAL slv_dma_rdata  : STD_LOGIC_VECTOR(rdata'range);
 
 BEGIN
 
@@ -137,17 +142,19 @@ END GENERATE make_sim_mem; make_16_mem: IF  NOT simulation AND data_width = 16  
       ClockA    => clk,
       ClockEnA  => enable,
       WrA       => write,
-      AddressA  => addr,
-      DataInA   => wdata,
-      QA        => rdata,
+      AddressA  => std_logic_vector(addr),
+      DataInA   => std_logic_vector(wdata),
+      QA        => slv_rdata,
       ResetB    => '0',
       ClockB    => clk,
       ClockEnB  => dma_enable,
       WrB       => dma_write,
-      AddressB  => dma_addr,
-      DataInB   => dma_wdata,
-      QB        => dma_rdata
+      AddressB  => std_logic_vector(dma_addr),
+      DataInB   => std_logic_vector(dma_wdata),
+      QB        => slv_dma_rdata
    );
+   rdata     <= unsigned(slv_rdata);
+   dma_rdata <= unsigned(slv_dma_rdata);
 
 END GENERATE make_16_mem; make_18_mem: IF  NOT simulation AND data_width = 18  GENERATE
 
@@ -157,17 +164,19 @@ END GENERATE make_16_mem; make_18_mem: IF  NOT simulation AND data_width = 18  G
       ClockA    => clk,
       ClockEnA  => enable,
       WrA       => write,
-      AddressA  => addr,
-      DataInA   => wdata,
-      QA        => rdata,
+      AddressA  => std_logic_vector(addr),
+      DataInA   => std_logic_vector(wdata),
+      QA        => slv_rdata,
       ResetB    => '0',
       ClockB    => clk,
       ClockEnB  => dma_enable,
       WrB       => dma_write,
-      AddressB  => dma_addr,
-      DataInB   => dma_wdata,
-      QB        => dma_rdata
+      AddressB  => std_logic_vector(dma_addr),
+      DataInB   => std_logic_vector(dma_wdata),
+      QB        => slv_dma_rdata
    );
+   rdata     <= unsigned(slv_rdata);
+   dma_rdata <= unsigned(slv_dma_rdata);
 
 END GENERATE make_18_mem; make_27_mem: IF  NOT simulation AND data_width = 27  GENERATE
 
@@ -177,17 +186,19 @@ END GENERATE make_18_mem; make_27_mem: IF  NOT simulation AND data_width = 27  G
       ClockA    => clk,
       ClockEnA  => enable,
       WrA       => write,
-      AddressA  => addr,
-      DataInA   => wdata,
-      QA        => rdata,
+      AddressA  => std_logic_vector(addr),
+      DataInA   => std_logic_vector(wdata),
+      QA        => slv_rdata,
       ResetB    => '0',
       ClockB    => clk,
       ClockEnB  => dma_enable,
       WrB       => dma_write,
-      AddressB  => dma_addr,
-      DataInB   => dma_wdata,
-      QB        => dma_rdata
+      AddressB  => std_logic_vector(dma_addr),
+      DataInB   => std_logic_vector(dma_wdata),
+      QB        => slv_dma_rdata
    );
+   rdata     <= unsigned(slv_rdata);
+   dma_rdata <= unsigned(slv_dma_rdata);
 
 END GENERATE make_27_mem; make_32_mem: IF  NOT simulation AND data_width = 32  GENERATE
 
@@ -197,11 +208,12 @@ END GENERATE make_27_mem; make_32_mem: IF  NOT simulation AND data_width = 32  G
       ClockEn   => enable,
       Reset     => '0',
       WE        => write,
-      Address   => addr,
-      Data      => wdata,
-      Q         => rdata
+      Address   => std_logic_vector(addr),
+      Data      => std_logic_vector(wdata),
+      Q         => slv_rdata
 	);
 
+   rdata     <= unsigned(slv_rdata);
    dma_rdata <= (OTHERS => '0');
 
 END GENERATE make_32_mem;
