@@ -1,6 +1,6 @@
 \ 
-\ Last change: KS 08.03.2021 18:10:00
-\ Last check in : $Rev: 658 $ $Date:: 2021-03-08 #$
+\ Last change: KS 25.03.2021 18:03:52
+\ Last check in : $Rev: 675 $ $Date:: 2021-03-25 #$
 \
 \ microCore load screen for simulation.
 \ It produces program.mem for initialization of the program memory during simulation.
@@ -27,7 +27,8 @@ library forth_lib.fs
 \ Booting and TRAPs
 \ ----------------------------------------------------------------------
 
-: boot  ( -- )  1 Leds ! EXIT
+: boot  ( -- )
+   $332211 #extern st @ 
    BEGIN REPEAT
 ;
 

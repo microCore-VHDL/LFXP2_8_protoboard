@@ -1,8 +1,8 @@
 ###==== BEGIN Header
 
 # Synopsys, Inc. constraint file
-# D:/technik/microcore/hardware/xp2_8_protoboard/synthesizer/core_lattice.fdc
-# Written on Sat Aug 10 17:24:09 2019
+# D:/technik/microcore/hardware/xp2_8_protoboard/synplify/core_lattice.fdc
+# Written on Thu Mar 25 23:01:49 2021
 # by Synplify Pro (R), M-2017.03L-SP1-1 FDC Constraint Editor
 
 # Custom constraint commands may be added outside of the SCOPE tab sections bounded with BEGIN/END.
@@ -38,20 +38,4 @@ create_clock  -name {clk} {p:clock} -period {40}
 
 ###==== BEGIN "Compile Points" - (Populated from tab in SCOPE, do not edit)
 ###==== END "Compile Points"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -3,7 +3,7 @@
 \ ----------------------------------------------------------------------
 \
 \ Last change: KS 27.03.2021 17:39:07
-\ Last check in: $Rev: 674 $ $Date:: 2021-03-24 #$
+\ Last check in: $Rev: 677 $ $Date:: 2021-03-27 #$
 \ @project: microCore
 \ @language: gforth_0.6.2
 \ @copyright (c): Free Software Foundation

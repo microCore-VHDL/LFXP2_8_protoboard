@@ -2,12 +2,13 @@
 \ @file : bootload.fs
 \ ----------------------------------------------------------------------
 \
-\ Last change: KS 13.03.2021 19:19:50
-\ Project : microCore
-\ Language : gforth_0.6.2
-\ Last check in : $Rev: 667 $ $Date:: 2021-03-14 #$
+\ Last change: KS 24.03.2021 17:49:48
+\ Last check in: $Rev: 674 $ $Date:: 2021-03-24 #$
+\ @project: microCore
+\ @language: gforth_0.6.2
 \ @copyright (c): Free Software Foundation
 \ @original author: ks - Klaus Schleisiek
+\ @contributor:
 \
 \ @license: This file is part of microForth.
 \ microForth is free software for microCore that loads on top of Gforth;

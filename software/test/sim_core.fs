@@ -1,6 +1,6 @@
 \ 
-\ Last change: KS 29.07.2020 16:25:46
-\ Last check in : $Rev: 608 $ $Date:: 2020-12-11 #$
+\ Last change: KS 23.03.2021 19:32:30
+\ Last check in : $Rev: 674 $ $Date:: 2021-03-24 #$
 \
 \ MicroCore load screen for coretest simulation.
 \ It produces program.mem for initialization of the program memory during simulation.
@@ -27,14 +27,16 @@ include constants.fs            \ MicroCore Register addresses and bits
 library forth_lib.fs
 include coretest.fs
 
+: boot  ( -- )   CALL INITIALIZATION coretest BEGIN REPEAT ;
+
 \ ----------------------------------------------------------------------
 \ Booting and TRAPs
 \ ----------------------------------------------------------------------
 
-#reset TRAP: rst    ( -- )            coretest          ;  \ compile branch to coretest at reset vector location
+#reset TRAP: rst    ( -- )            boot              ;  \ compile branch to coretest at reset vector location
 #isr   TRAP: isr    ( -- )            interrupt IRET    ;
 #psr   TRAP: psr    ( -- )            #f-sema release   ;  \ matches coretest's test_sema
 
 end
 
-MEM-file program.mem  cr .( sim_core.fs written to program.mem )   
+MEM-file program.mem  cr .( sim_core.fs written to program.mem )

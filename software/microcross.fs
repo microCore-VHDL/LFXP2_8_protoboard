@@ -2,12 +2,13 @@
 \ @file : microcross.fs
 \ ----------------------------------------------------------------------
 \
-\ Last change: KS 14.03.2021 00:43:59
-\ Project : microCore
-\ Language : gforth_0.6.2
-\ Last check in : $Rev: 667 $ $Date:: 2021-03-14 #$
+\ Last change: KS 24.03.2021 17:52:24
+\ Last check in: $Rev: 674 $ $Date:: 2021-03-24 #$
+\ @project: microCore
+\ @language: gforth_0.6.2
 \ @copyright (c): Free Software Foundation
 \ @original author: ks - Klaus Schleisiek
+\ @contributor:
 \
 \ @license: This file is part of microForth.
 \ microForth is free software for microCore that loads on top of Gforth;
@@ -26,15 +27,15 @@
 \ Version Author   Date       Changes
 \   210     ks   14-Jun-2020  initial version
 \   2200    ks   19-Oct-2020  Library mechanism integrated
-\   2300    ks   17-Feb-2021  OOP mechanism integrated
+\   2300    ks   18-Feb-2021  OOP mechanism integrated
 \ ----------------------------------------------------------------------
 Forth definitions
 
 : $Rev:         &36 parse s, postpone \ ; immediate
 : $Date::  [char] # parse s, postpone \ ; immediate
 
-Create revision $Rev: 667 $           \ Subversion revision number
-Create datum    $Date:: 2021-03-14 #$ \ Subversion check in date
+Create revision $Rev: 674 $           \ Subversion revision number
+Create datum    $Date:: 2021-03-24 #$ \ Subversion check in date
 
 : .revision ( -- )  revision count type ;
 : .date     ( -- )  datum count type ;
@@ -1169,9 +1170,11 @@ H extended              T Version EXTENDED       \ extended instruction set?
 H with_mult             T Version WITH_MULT      \ hardware multiply available?
 H with_float            T Version WITH_FLOAT
 H with_up_download      T Version WITH_UP_DOWNLOAD
+H data_addr_width
+  cache_addr_width u>   T Version WITH_EXTMEM
 
 H data_width            T Constant data_width
-H ext_data_width        T Constant ext_data_width
+H ram_data_width        T Constant ram_data_width
 H data_addr_width       T Constant data_addr_width
 H cache_addr_width      T Constant cache_addr_width
 H exp_width             T Constant exp_width

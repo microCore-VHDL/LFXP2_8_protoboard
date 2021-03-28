@@ -29,8 +29,9 @@ add wave -noupdate /bench/myFPGA/uCore/uCntrl/r.dsp
 add wave -noupdate -divider {Return Stack}
 add wave -noupdate /bench/myFPGA/uCore/uCntrl/r.tor
 add wave -noupdate /bench/myFPGA/uCore/mem_rdata
-add wave -noupdate /bench/myFPGA/uCore/mem_addr
 add wave -noupdate /bench/myFPGA/uCore/uCntrl/r.rsp
+add wave -noupdate /bench/myFPGA/uCore/uCntrl/mem_addr
+add wave -noupdate /bench/myFPGA/uCore/cache_addr
 add wave -noupdate -divider Alu
 add wave -noupdate /bench/myFPGA/uCore/uCntrl/cin
 add wave -noupdate /bench/myFPGA/uCore/uCntrl/ladd_x
@@ -50,7 +51,7 @@ add wave -noupdate /bench/myFPGA/uCore/uCntrl/pending
 add wave -noupdate /bench/myFPGA/uCore/uCntrl/interrupt
 add wave -noupdate /bench/myFPGA/uCore/uCntrl/s.iis
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {102060 ns} 0} {{Cursor 2} {977 ns} 0} {{Cursor 3} {73861 ns} 0}
+WaveRestoreCursors {{Cursor 1} {2178 ns} 0} {{Cursor 2} {121737 ns} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 111
 configure wave -valuecolwidth 68
@@ -66,4 +67,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ns} {126 us}
+WaveRestoreZoom {1694 ns} {3075 ns}

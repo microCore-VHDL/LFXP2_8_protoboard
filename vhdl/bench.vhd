@@ -2,14 +2,15 @@
 -- @file : bench.vhd testbench for the XP2-8E Demoboard
 -- ---------------------------------------------------------------------
 --
--- Last change: KS 11.03.2021 11:03:08
--- Project : microCore
--- Language : VHDL-2008
--- Last check in : $Rev: 665 $ $Date:: 2021-03-12 #$
+-- Last change: KS 24.03.2021 17:41:32
+-- Last check in: $Rev: 674 $ $Date:: 2021-03-24 #$
+-- @project: microCore
+-- @language : VHDL-2008
 -- @copyright (c): Klaus Schleisiek, All Rights Reserved.
+-- @contributors :
 --
--- Do not use this file except in compliance with the License.
--- You may obtain a copy of the License at
+-- @license: Do not use this file except in compliance with the License.
+-- You may obtain a copy of the Public License at
 -- https://github.com/microCore-VHDL/microCore/tree/master/documents
 -- Software distributed under the License is distributed on an "AS IS"
 -- basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
@@ -27,7 +28,7 @@
 --
 -- Version Author   Date       Changes
 --   210     ks    8-Jun-2020  initial version
---  2300     ks    8-Mar-2021  update of umbilical tests
+--  2300     ks   11-Mar-2021  update of umbilical tests
 --                             STD_LOGIC_(UN)SIGNED replaced by NUMERIC_STD
 -- ---------------------------------------------------------------------
 
@@ -44,10 +45,10 @@ END bench;
 ARCHITECTURE testbench OF bench IS
 
 CONSTANT prog_len   : NATURAL := 10;    -- length of sim_boot.fs
-CONSTANT progload   : STD_LOGIC := '0'; -- use sim_progload.fs   progload.do   MEM_file := "none"                     90 usec
+CONSTANT progload   : STD_LOGIC := '0'; -- use sim_progload.fs   progload.do   MEM_file := ""                         90 usec
 CONSTANT debug      : STD_LOGIC := '0'; -- use sim_debug.fs      debug.do      MEM_FILE := "../software/program.mem"  90 usec
 CONSTANT handshake  : STD_LOGIC := '0'; -- use sim_handshake.fs  handshake.do  MEM_FILE := "../software/program.mem" 160 usec
-CONSTANT upload     : STD_LOGIC := '0'; -- use sim_upload.fs     upload.do     MEM_FILE := "../software/program.mem"  90 usec
+CONSTANT upload     : STD_LOGIC := '0'; -- use sim_upload.fs     upload.do     MEM_FILE := "../software/program.mem" 135 usec
 CONSTANT download   : STD_LOGIC := '0'; -- use sim_updown.fs     download.do   MEM_FILE := "../software/program.mem"  80 usec
 CONSTANT break      : STD_LOGIC := '0'; -- use sim_break.fs      break.do      MEM_FILE := "../software/program.mem" 220 usec
 
@@ -63,8 +64,8 @@ COMPONENT fpga PORT (
    ce_n        : OUT   STD_LOGIC;
    oe_n        : OUT   STD_LOGIC;
    we_n        : OUT   STD_LOGIC;
-   addr        : OUT   UNSIGNED(mem_addr_width-1 DOWNTO 0);
-   data        : INOUT UNSIGNED(ext_data_width-1 DOWNTO 0);
+   addr        : OUT   UNSIGNED(ram_addr_width-1 DOWNTO 0);
+   data        : INOUT UNSIGNED(ram_data_width-1 DOWNTO 0);
 -- umbilical port for debugging
    dsu_rxd     : IN    STD_LOGIC;  -- incoming asynchronous data stream
    dsu_txd     : OUT   STD_LOGIC   -- outgoing data stream
@@ -112,8 +113,8 @@ SIGNAL leds_n       : byte;
 SIGNAL ext_ce_n     : STD_LOGIC;
 SIGNAL ext_oe_n     : STD_LOGIC;
 SIGNAL ext_we_n     : STD_LOGIC;
-SIGNAL ext_addr     : UNSIGNED(mem_addr_width-1 DOWNTO 0);
-SIGNAL ext_data     : UNSIGNED(ext_data_width-1 DOWNTO 0);
+SIGNAL ext_addr     : UNSIGNED(ram_addr_width-1 DOWNTO 0);
+SIGNAL ext_data     : UNSIGNED(ram_data_width-1 DOWNTO 0);
 
 BEGIN
 
@@ -121,7 +122,7 @@ BEGIN
 -- Test vector generation
 -- ---------------------------------------------------------------------
 
-int_n <= '1', '0' AFTER int_time, '1' AFTER int_time + 400 ns;
+int_n <= '1', '0' AFTER int_time, '1' AFTER int_time + 600 ns;
 
 bitout <= NOT leds_n(0);
 
@@ -336,7 +337,9 @@ BEGIN
 -- coretest
    text := NEW string'("starting core test ...");
    writeline(output, text);
-   WAIT UNTIL bitout = '1'; WAIT UNTIL bitout = '0'; WAIT UNTIL bitout = '1';
+   WAIT UNTIL bitout = '1';
+   WAIT UNTIL bitout = '0';
+   WAIT UNTIL bitout = '1';
    ASSERT false REPORT "core test ok" SEVERITY note;
    WAIT;
 
@@ -458,7 +461,7 @@ END PROCESS xtal_clock;
 -- ---------------------------------------------------------------------
 
 ext_SRAM: external_ram
-GENERIC MAP (ext_data_width, mem_addr_width)
+GENERIC MAP (ram_data_width, ram_addr_width)
 PORT MAP (
    ce_n   => ext_ce_n,
    oe_n   => ext_oe_n,
