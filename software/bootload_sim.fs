@@ -2,9 +2,8 @@
 \ @file : bootload_sim.fs
 \ ----------------------------------------------------------------------
 \
-\ Last change: KS 24.03.2021 17:50:03
-\ Last check in: $Rev: 674 $ $Date:: 2021-03-24 #$
-\ @project: microCore
+\ Last change: KS 05.04.2021 16:46:46
+\ @project: microForth/microCore
 \ @language: gforth_0.6.2
 \ @copyright (c): Free Software Foundation
 \ @original author: ks - Klaus Schleisiek
@@ -43,7 +42,6 @@ Target new                      \ go into target compilation mode and initialize
 0 data-origin
 
 ] 0 noop BRANCH [            \ immediately go to the preset program memory
-\ ] 0 BEGIN REPEAT [          \ hang in endless loop waiting for program loading via umbilical
 
 end
 

@@ -1,4 +1,33 @@
 ************************************************************************
+*** XP2 2.320   1-Apr-2021 ks
+************************************************************************
+
+Rewriting the VHDL code for VHDL-93 instead of VHDL-2008
+Some additional modifications to make it synthesizable by XST.
+
+Moving the data cache memory interface from uCore.vhd to fpga.vhd.
+
+architecture_pkg.vhd: New parameters cache_size and prog_size, because
+   those may be smaller than 2**cache_addr_width or 2**prog_addr_width
+   respectively.
+
+functions_pkg.vhd: All internal memory components now take the actual
+   RAM size as generic instead of the addr_width.
+   
+The blockRAM memory IPs (internal_datamem_NN) have been included into
+the resp. uDatacache.vhd file, which itself has been renamed to make
+the hardware dependence more clear. Therefore, we now have:
+
+uDatachache.vhd for cache configurations (e.g. 24 bit), that can be
+   inferred efficiently.
+uDcache_XP2_16.vhd
+uDcache_XP2_18.vhd
+uDcache_XP2_27.vhd
+uDcache_XP2_32.vhd
+The latter will consume additional RAM blocks when inferred, which are 
+not available using the XP2_8.
+
+************************************************************************
 *** XP2 2.310  23-Mar-2021 ks
 ************************************************************************
 

@@ -31,7 +31,7 @@ add wave -noupdate /bench/myFPGA/uCore/uCntrl/r.tor
 add wave -noupdate /bench/myFPGA/uCore/mem_rdata
 add wave -noupdate /bench/myFPGA/uCore/uCntrl/r.rsp
 add wave -noupdate /bench/myFPGA/uCore/uCntrl/mem_addr
-add wave -noupdate /bench/myFPGA/uCore/cache_addr
+add wave -noupdate /bench/myFPGA/cache_addr
 add wave -noupdate -divider Alu
 add wave -noupdate /bench/myFPGA/uCore/uCntrl/cin
 add wave -noupdate /bench/myFPGA/uCore/uCntrl/ladd_x

@@ -1,7 +1,7 @@
 #--  Synopsys, Inc.
 #--  Version M-2017.03L-SP1-1
 #--  Project file D:\technik\microcore\hardware\xp2_8_protoboard\synplify\uCore_XP2-8E.prj
-#--  Written on Fri Mar 26 23:17:30 2021
+#--  Written on Mon Apr  5 16:29:14 2021
 
 
 #project files
@@ -11,21 +11,24 @@ add_file -vhdl -lib work "../vhdl/uArithmetic.vhd"
 add_file -vhdl -lib work "../vhdl/uCntrl.vhd"
 add_file -vhdl -lib work "../vhdl/uart.vhd"
 add_file -vhdl -lib work "../vhdl/debugger.vhd"
-add_file -vhdl -lib work "../vhdl/bootload.VHD"
+add_file -vhdl -lib work "../vhdl/bootload.vhd"
 add_file -vhdl -lib work "../vhdl/uProgmem.vhd"
-add_file -vhdl -lib work "../vhdl/internal_datamem_16.vhd"
-add_file -vhdl -lib work "../vhdl/internal_datamem_18.vhd"
-add_file -vhdl -lib work "../vhdl/internal_datamem_27.vhd"
-add_file -vhdl -lib work "../vhdl/internal_datamem_32.vhd"
-add_file -vhdl -lib work "../vhdl/uDatacache.vhd"
 add_file -vhdl -lib work "../vhdl/uCore.vhd"
+#add_file -vhdl -lib work "../vhdl/uDatacache.vhd"
+#add_file -vhdl -lib work "../vhdl/uDcache_XP2_16.vhd"
+#add_file -vhdl -lib work "../vhdl/uDcache_XP2_18.vhd"
+#add_file -vhdl -lib work "../vhdl/uDcache_XP2_27.vhd"
+add_file -vhdl -lib work "../vhdl/uDcache_XP2_32.vhd"
 add_file -vhdl -lib work "../vhdl/external_SRAM.vhd"
 add_file -vhdl -lib work "../vhdl/fpga.vhd"
 add_file -fpga_constraint "core_lattice.fdc"
 
+
+
 #implementation: "synplify"
 impl -add synplify -type fpga
 
+#
 #implementation attributes
 
 set_option -vlog_std sysv
@@ -74,7 +77,7 @@ set_option -symbolic_fsm_compiler 0
 
 # Compiler Options
 set_option -compiler_compatible 0
-set_option -resource_sharing 1
+set_option -resource_sharing 0
 set_option -multi_file_compilation_unit 1
 
 # Compiler Options

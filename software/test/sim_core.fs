@@ -1,6 +1,5 @@
 \ 
-\ Last change: KS 23.03.2021 19:32:30
-\ Last check in : $Rev: 674 $ $Date:: 2021-03-24 #$
+\ Last change: KS 25.03.2021 20:56:31
 \
 \ MicroCore load screen for coretest simulation.
 \ It produces program.mem for initialization of the program memory during simulation.
@@ -36,6 +35,7 @@ include coretest.fs
 #reset TRAP: rst    ( -- )            boot              ;  \ compile branch to coretest at reset vector location
 #isr   TRAP: isr    ( -- )            interrupt IRET    ;
 #psr   TRAP: psr    ( -- )            #f-sema release   ;  \ matches coretest's test_sema
+#data! TRAP: data!  ( dp n -- dp+1 )  swap st 1+        ;  \ Data memory initialization
 
 end
 
