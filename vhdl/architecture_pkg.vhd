@@ -2,7 +2,7 @@
 -- @file : architecture_pkg.vhd for the XP2-8E Demoboard
 -- ---------------------------------------------------------------------
 --
--- Last change: KS 10.04.2021 19:44:29
+-- Last change: KS 27.08.2021 19:20:26
 -- @project: microCore
 -- @language: VHDL-93
 -- @copyright (c): Klaus Schleisiek, All Rights Reserved.
@@ -34,7 +34,7 @@ USE work.functions_pkg.ALL;
 PACKAGE architecture_pkg IS
 --~--  \ when loaded by the microForth cross-compiler, code between "--~" up to "--~--" will be skipped.
 
-CONSTANT version            : NATURAL := 2320; -- <major_release><functionality_added><HW_fix><SW_fix><pre-release#>
+CONSTANT version            : NATURAL := 2331; -- <major_release> <functionality_added> <HW_fix> <SW_fix> <pre-release#>
 
 -- ---------------------------------------------------------------------
 -- Configuration flags
@@ -46,7 +46,7 @@ CONSTANT SIMULATION         : BOOLEAN := false ; -- will e.g. increase the frequ
 CONSTANT COLDBOOT           : BOOLEAN := false ; -- cold boot on reset when true, else warmboot
 CONSTANT EXTENDED           : BOOLEAN := true  ; -- false -> core instruction set, true -> extended instruction set
 CONSTANT WITH_MULT          : BOOLEAN := true  ; -- true when FPGA has hardware multiply resources
-CONSTANT WITH_FLOAT         : BOOLEAN := true  ; -- floating point instructions?
+CONSTANT WITH_FLOAT         : BOOLEAN := false ; -- floating point instructions?
 CONSTANT WITH_UP_DOWNLOAD   : BOOLEAN := true  ; -- up/download via umbilical?
 
 -- ---------------------------------------------------------------------

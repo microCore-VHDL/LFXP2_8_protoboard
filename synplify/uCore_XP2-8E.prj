@@ -14,7 +14,7 @@ add_file -vhdl -lib work "../vhdl/debugger.vhd"
 add_file -vhdl -lib work "../vhdl/bootload.vhd"
 add_file -vhdl -lib work "../vhdl/uProgmem.vhd"
 add_file -vhdl -lib work "../vhdl/uCore.vhd"
-#add_file -vhdl -lib work "../vhdl/uDatacache.vhd"
+#add_file -vhdl -lib work "../vhdl/uDatacache.vhd"  # automatic inference e.g. 24 bits
 #add_file -vhdl -lib work "../vhdl/uDcache_XP2_16.vhd"
 #add_file -vhdl -lib work "../vhdl/uDcache_XP2_18.vhd"
 #add_file -vhdl -lib work "../vhdl/uDcache_XP2_27.vhd"
