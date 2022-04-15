@@ -1,7 +1,7 @@
 #--  Synopsys, Inc.
-#--  Version M-2017.03L-SP1-1
+#--  Version N-2018.03L-SP1-1
 #--  Project file D:\technik\microcore\hardware\xp2_8_protoboard\synplify\uCore_XP2-8E.prj
-#--  Written on Mon Apr  5 16:29:14 2021
+#--  Written on Wed Feb  9 00:40:56 2022
 
 
 #project files
@@ -23,12 +23,9 @@ add_file -vhdl -lib work "../vhdl/external_SRAM.vhd"
 add_file -vhdl -lib work "../vhdl/fpga.vhd"
 add_file -fpga_constraint "core_lattice.fdc"
 
-
-
 #implementation: "synplify"
 impl -add synplify -type fpga
 
-#
 #implementation attributes
 
 set_option -vlog_std sysv

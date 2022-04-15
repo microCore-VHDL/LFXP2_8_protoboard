@@ -3,12 +3,11 @@ std = $MODEL_TECH/../std
 ieee = $MODEL_TECH/../ieee
 verilog = $MODEL_TECH/../verilog
 std_developerskit = $MODEL_TECH/../std_developerskit
-
-XP2 = C:/lscc/diamond/3.10_x64/cae_library/simulation/vhdl/xp2/mti/work
+XP2 = C:/lscc/diamond/3.11_x64/cae_library/simulation/vhdl/xp2/mti/work
 work = work
-[vcom]
-VHDL93 = 93
 
+[vcom]
+VHDL93 = 2008
 NoDebug = 0
 Explicit = 1
 CheckSynthesis = 0
@@ -70,7 +69,7 @@ Project_Version = 6
 Project_DefaultLib = work
 Project_SortMethod = unused
 Project_Files_Count = 14
-Project_File_0 = D:/technik/microcore/hardware/xp2_8_protoboard/vhdl/uArithmetic.vhd
+Project_File_0 = ../vhdl/uArithmetic.vhd
 Project_File_P_0 = cover_toggle 0 vhdl_novitalcheck 1 file_type vhdl group_id 0 cover_exttoggle 0 cover_nofec 0 vhdl_nodebug 0 vhdl_1164 1 cover_cond 0 vhdl_noload 1 vhdl_synth 0 vhdl_enable0In 0 folder {Top Level} last_compile 1617638729 vhdl_disableopt 0 cover_fsm 0 cover_branch 0 vhdl_vital 1 cover_excludedefault 0 vhdl_warn1 0 vhdl_showsource 1 vhdl_explicit 1 vhdl_warn2 1 vhdl_0InOptions {} cover_covercells 0 vhdl_warn3 0 vhdl_options {} cover_optlevel 3 voptflow 1 vhdl_warn4 1 ood 0 toggle - vhdl_warn5 1 compile_to work cover_noshort 0 compile_order 2 dont_compile 0 cover_nosub 0 cover_expr 0 vhdl_use93 93 cover_stmt 0
 Project_File_1 = ../vhdl/uCntrl.vhd
 Project_File_P_1 = cover_toggle 0 vhdl_novitalcheck 1 file_type vhdl group_id 0 cover_exttoggle 0 cover_nofec 0 vhdl_nodebug 0 vhdl_1164 1 cover_cond 0 vhdl_noload 1 vhdl_synth 0 vhdl_enable0In 0 folder {Top Level} last_compile 1617634396 vhdl_disableopt 0 cover_fsm 0 cover_branch 0 vhdl_vital 1 cover_excludedefault 0 vhdl_warn1 0 vhdl_showsource 1 vhdl_explicit 1 vhdl_warn2 1 vhdl_0InOptions {} cover_covercells 0 vhdl_warn3 0 vhdl_options {} cover_optlevel 3 voptflow 1 vhdl_warn4 1 ood 0 toggle - vhdl_warn5 1 compile_to work cover_noshort 0 compile_order 3 dont_compile 0 cover_nosub 0 cover_expr 0 vhdl_use93 93 cover_stmt 0

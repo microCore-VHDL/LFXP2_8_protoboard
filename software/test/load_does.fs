@@ -39,7 +39,7 @@ $4321 Object Das
 : test ( -- )  Dies . ;
 
 \ ----------------------------------------------------------------------
-\ Booting and TRAPs
+\ Interrupt
 \ ----------------------------------------------------------------------
 
 Variable Ticker  0 Ticker !
@@ -47,15 +47,19 @@ Variable Ticker  0 Ticker !
 : interrupt ( -- )  intflags
    #i-time and IF  1 Ticker +!  #i-time not Flag-reg !  THEN
 ;
-init: init-does  ( -- )  0 Leds !  #i-time int-enable ei ;
+init: init-int  ( -- )  0 Leds !  #i-time int-enable ei ;
 
-: boot  ( -- )   0 #cache erase   CALL initialization   debug-service ;
+\ ----------------------------------------------------------------------
+\ Booting and TRAPs
+\ ----------------------------------------------------------------------
 
-#reset TRAP: rst    ( -- )            boot              ;  \ compile branch to boot at reset vector location
-#isr   TRAP: isr    ( -- )            interrupt IRET    ;
-#psr   TRAP: psr    ( -- )            pause             ;  \ call the scheduler, eventually re-execute instruction
-#break TRAP: break  ( -- )            debugger          ;  \ Debugger
-#does> TRAP: dodoes ( addr -- addr' ) ld 1+ swap BRANCH ;  \ the DOES> runtime primitive
-#data! TRAP: data!  ( dp n -- dp+1 )  swap st 1+        ;  \ Data memory initialization
+: boot  ( -- )   0 #cache erase   CALL initialization  debug-service ;
+
+#reset TRAP: rst    ( -- )            boot                 ;  \ compile branch to boot at reset vector location
+#isr   TRAP: isr    ( -- )            interrupt IRET       ;
+#psr   TRAP: psr    ( -- )            pause                ;  \ call the scheduler, eventually re-execute instruction
+#break TRAP: break  ( -- )            debugger             ;  \ Debugger
+#does> TRAP: dodoes ( addr -- addr' ) ld cell+ swap BRANCH ;  \ the DOES> runtime primitive
+#data! TRAP: data!  ( dp n -- dp+1 )  swap st cell+        ;  \ Data memory initialization
 
 end

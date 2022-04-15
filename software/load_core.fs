@@ -1,5 +1,5 @@
 \ 
-\ Last change: KS 23.03.2021 19:33:25
+\ Last change: KS 01.03.2022 17:55:55
 \
 \ MicroCore load screen for the coretest program that is transferred
 \ into the program memory via the umbilical.
@@ -13,7 +13,7 @@ Only Forth also definitions
 [IFDEF] close-port  close-port [ENDIF]
 [IFDEF] microcore   microcore  [ENDIF]   Marker microcore
 
-include extensions.fs           \ Some System word (re)definitions for a more sympathetic environment
+include extensions.fs           \ Some System word (re)definitions
 include ../vhdl/architecture_pkg.vhd
 include microcross.fs           \ the cross-compiler
 
@@ -33,15 +33,15 @@ include coretest.fs
 \ Booting and TRAPs
 \ ----------------------------------------------------------------------
 
-init: init-leds  ( -- )   0 Leds ! ;
+init: init-leds ( -- )  0 Leds ! ;
 
-: boot  ( -- )   0 #cache erase   CALL initialization   debug-service ;
+: boot  ( -- )   0 #cache erase   CALL initialization  debug-service ;
 
-#reset TRAP: rst    ( -- )            boot              ;  \ compile branch to boot at reset vector location
-#isr   TRAP: isr    ( -- )            interrupt IRET    ;
-#psr   TRAP: psr    ( -- )            pause             ;  \ call the scheduler, eventually re-execute instruction
-#break TRAP: break  ( -- )            debugger          ;  \ Debugger
-#does> TRAP: dodoes ( addr -- addr' ) ld 1+ swap BRANCH ;  \ the DOES> runtime primitive
-#data! TRAP: data!  ( dp n -- dp+1 )  swap st 1+        ;  \ Data memory initialization
+#reset TRAP: rst    ( -- )            boot                 ;  \ compile branch to boot at reset vector location
+#isr   TRAP: isr    ( -- )            interrupt IRET       ;
+#psr   TRAP: psr    ( -- )            pause                ;  \ call the scheduler, eventually re-execute instruction
+#break TRAP: break  ( -- )            debugger             ;  \ Debugger
+#does> TRAP: dodoes ( addr -- addr' ) ld cell+ swap BRANCH ;  \ the DOES> runtime primitive
+#data! TRAP: data!  ( dp n -- dp+1 )  swap st cell+        ;  \ Data memory initialization
 
 end

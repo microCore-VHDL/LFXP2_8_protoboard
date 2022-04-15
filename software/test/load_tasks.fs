@@ -1,5 +1,5 @@
 \
-\ Last change: KS 13.03.2021 19:11:16
+\ Last change: KS 21.07.2021 19:17:31
 \
 \ MicroCore load screen to test all aspects of the multitasker.
 \ Use  .tasks and .semas to observe the state of the system.
@@ -23,15 +23,15 @@ Target new initialized          \ go into target compilation mode and initialize
 
 include constants.fs            \ MicroCore Register addresses and bits
 include debugger.fs
-library forth_lib.fs
-library task_lib.fs
+library forth_lib.fs preload ,
+library task_lib.fs  preload pause
 
 Task Blinker
 
 Semaphore Sema
 Semaphore Mailbox
 
-: mailbox-init  ( -- )   0 dup Mailbox st 1+ !  di ;
+: mailbox-init  ( -- )   di   Mailbox 2 erase ;
 
 \ ----------------------------------------------------------------------
 \ lock ... unlock mutual exclusion via Sema.
@@ -58,8 +58,8 @@ Variable Waits
 
 : itime-reset  ( -- )   #i-time not Flag-reg ! ;
 
-: gowait     ( -- )     Blinker ['] waittask activate  di  itime-reset
-                        0   dup Signals !  Waits !   mailbox-init   ei
+: gowait     ( -- )     mailbox-init   Blinker ['] waittask activate
+                        itime-reset   0  dup Signals !  Waits !   ei
 ;
 : ??         ( -- )     Status @  di  Signals @  Waits @   rot Status !  over . dup . - . ;
 
@@ -112,15 +112,15 @@ init: init-tasks     ( -- )
    Terminal Blinker schedule
    #i-time int-enable
 ;
-init: init-leds  ( -- )   0 Leds ! ;
+init: init-leds ( -- )  0 Leds ! ;
 
-: boot  ( -- )   0 #cache erase   CALL initialization   debug-service ;
+: boot  ( -- )   0 #cache erase   CALL initialization  debug-service ;
 
-#reset TRAP: rst    ( -- )            boot              ;  \ compile branch to boot at reset vector location
-#isr   TRAP: isr    ( -- )            interrupt IRET    ;
-#psr   TRAP: psr    ( -- )            pause             ;  \ call the scheduler, eventually re-execute instruction
-#break TRAP: break  ( -- )            debugger          ;  \ Debugger
-#does> TRAP: dodoes ( addr -- addr' ) ld 1+ swap BRANCH ;  \ the DOES> runtime primitive
-#data! TRAP: data!  ( dp n -- dp+1 )  swap st 1+        ;  \ Data memory initialization
+#reset TRAP: rst    ( -- )            boot                 ;  \ compile branch to boot at reset vector location
+#isr   TRAP: isr    ( -- )            interrupt IRET       ;
+#psr   TRAP: psr    ( -- )            pause                ;  \ call the scheduler, eventually re-execute instruction
+#break TRAP: break  ( -- )            debugger             ;  \ Debugger
+#does> TRAP: dodoes ( addr -- addr' ) ld cell+ swap BRANCH ;  \ the DOES> runtime primitive
+#data! TRAP: data!  ( dp n -- dp+1 )  swap st cell+        ;  \ Data memory initialization
 
 end

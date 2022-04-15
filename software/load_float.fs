@@ -64,18 +64,24 @@ B-factor -T0 f/ R0 fln f+ fexp Constant R-lim
 : ntc-test  ( -- )   -&2000 &50 FOR  cr dup 6 .r   dup t>r dup 6 .r   r>t dup 6 .r over - 3 .r  &200 + NEXT  drop ;
 
 \ ----------------------------------------------------------------------
+\ Interrupt
+\ ----------------------------------------------------------------------
+
+: interrupt ( -- )  intflags drop ;
+
+\ ----------------------------------------------------------------------
 \ Booting and TRAPs
 \ ----------------------------------------------------------------------
 
 init: init-leds  ( -- )   0 Leds ! ;
 
-: boot  ( -- )   0 #cache erase   CALL initialization   debug-service ;
+: boot  ( -- )   0 #cache erase   CALL initialization  debug-service ;
 
-#reset TRAP: rst    ( -- )            boot              ;  \ compile branch to boot at reset vector location
-#isr   TRAP: isr    ( -- )            di IRET           ;
-#psr   TRAP: psr    ( -- )            pause             ;  \ call the scheduler, eventually re-execute instruction
-#break TRAP: break  ( -- )            debugger          ;  \ Debugger
-#does> TRAP: dodoes ( addr -- addr' ) ld 1+ swap BRANCH ;  \ the DOES> runtime primitive
-#data! TRAP: data!  ( dp n -- dp+1 )  swap st 1+        ;  \ Data memory initialization
+#reset TRAP: rst    ( -- )            boot                 ;  \ compile branch to boot at reset vector location
+#isr   TRAP: isr    ( -- )            interrupt IRET       ;
+#psr   TRAP: psr    ( -- )            pause                ;  \ call the scheduler, eventually re-execute instruction
+#break TRAP: break  ( -- )            debugger             ;  \ Debugger
+#does> TRAP: dodoes ( addr -- addr' ) ld cell+ swap BRANCH ;  \ the DOES> runtime primitive
+#data! TRAP: data!  ( dp n -- dp+1 )  swap st cell+        ;  \ Data memory initialization
 
 end

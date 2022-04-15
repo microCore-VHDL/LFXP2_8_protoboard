@@ -69,17 +69,23 @@ Create Field     \ must be last Create with empty space until #cache
 
 : ??    ( -- )   divisor @   dividend @ . . Errors @ u. Ambiguous @ u. ;
 
-\ --------------------------------------------------------------------------------
-\ booting and traps
-\ --------------------------------------------------------------------------------
+\ ----------------------------------------------------------------------
+\ Interrupt
+\ ----------------------------------------------------------------------
 
-: boot  ( -- )   0 #cache erase   CALL initialization   debug-service ;
+: interrupt ( -- )  intflags drop ;
 
-#reset TRAP: rst    ( -- )            boot              ;  \ compile branch to boot at reset vector location
-#isr   TRAP: isr    ( -- )            di IRET           ;
-#psr   TRAP: psr    ( -- )            pause             ;  \ call the scheduler, eventually re-execute instruction
-#break TRAP: break  ( -- )            debugger          ;  \ Debugger
-#does> TRAP: dodoes ( addr -- addr' ) ld 1+ swap BRANCH ;  \ the DOES> runtime primitive
-#data! TRAP: data!  ( dp n -- dp+1 )  swap st 1+        ;  \ Data memory initialization
+\ ----------------------------------------------------------------------
+\ Booting and TRAPs
+\ ----------------------------------------------------------------------
+
+: boot  ( -- )   0 #cache erase   CALL initialization  debug-service ;
+
+#reset TRAP: rst    ( -- )            boot                 ;  \ compile branch to boot at reset vector location
+#isr   TRAP: isr    ( -- )            interrupt IRET       ;
+#psr   TRAP: psr    ( -- )            pause                ;  \ call the scheduler, eventually re-execute instruction
+#break TRAP: break  ( -- )            debugger             ;  \ Debugger
+#does> TRAP: dodoes ( addr -- addr' ) ld cell+ swap BRANCH ;  \ the DOES> runtime primitive
+#data! TRAP: data!  ( dp n -- dp+1 )  swap st cell+        ;  \ Data memory initialization
 
 end

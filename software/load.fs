@@ -1,5 +1,5 @@
 \
-\ Last change: KS 13.03.2021 19:11:06
+\ Last change: KS 14.04.2022 17:41:22
 \
 \ Basic microCore load screen for execution on the target.
 \
@@ -22,7 +22,8 @@ Target new initialized          \ go into target compilation mode and initialize
 
 include constants.fs            \ MicroCore Register addresses and bits
 include debugger.fs
-library forth_lib.fs
+library forth_lib.fs  preload ,
+\ library task_lib.fs   preload pause
 
 \ ----------------------------------------------------------------------
 \ Interrupt
@@ -43,11 +44,11 @@ init: init-leds ( -- )  0 Leds ! ;
 
 : boot  ( -- )   0 #cache erase   CALL initialization  debug-service ;
 
-#reset TRAP: rst    ( -- )            boot              ;  \ compile branch to boot at reset vector location
-#isr   TRAP: isr    ( -- )            interrupt IRET    ;
-#psr   TRAP: psr    ( -- )            pause             ;  \ call the scheduler, eventually re-execute instruction
-#break TRAP: break  ( -- )            debugger          ;  \ Debugger
-#does> TRAP: dodoes ( addr -- addr' ) ld 1+ swap BRANCH ;  \ the DOES> runtime primitive
-#data! TRAP: data!  ( dp n -- dp+1 )  swap st 1+        ;  \ Data memory initialization
+#reset TRAP: rst    ( -- )            boot                 ;  \ compile branch to boot at reset vector location
+#isr   TRAP: isr    ( -- )            interrupt IRET       ;
+#psr   TRAP: psr    ( -- )            pause                ;  \ call the scheduler, eventually re-execute instruction
+#break TRAP: break  ( -- )            debugger             ;  \ Debugger
+#does> TRAP: dodoes ( addr -- addr' ) ld cell+ swap BRANCH ;  \ the DOES> runtime primitive
+#data! TRAP: data!  ( dp n -- dp+1 )  swap st cell+        ;  \ Data memory initialization
 
 end

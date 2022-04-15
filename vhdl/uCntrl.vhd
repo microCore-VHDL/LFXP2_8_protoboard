@@ -2,7 +2,7 @@
 -- @file : uCntrl.vhd
 -- ---------------------------------------------------------------------
 --
--- Last change: KS 26.08.2021 22:47:00
+-- Last change: KS 16.03.2022 18:47:36
 -- @project: microCore
 -- @language: VHDL-93
 -- @copyright (c): Klaus Schleisiek, All Rights Reserved.
@@ -30,8 +30,8 @@ USE IEEE.NUMERIC_STD.ALL;
 USE work.functions_pkg.ALL;
 USE work.architecture_pkg.ALL;
 
-ENTITY microcontrol IS PORT (
-   uBus        : IN  uBus_port;
+ENTITY microcontrol IS PORT
+(  uBus        : IN  uBus_port;
    deb_reset   : IN  STD_LOGIC;    -- reset issued by debugger
    deb_pause   : IN  STD_LOGIC;    -- pause issued by debugger
    deb_penable : IN  STD_LOGIC;    -- program memory ready for write by debugger
@@ -44,10 +44,10 @@ ENTITY microcontrol IS PORT (
 
 ARCHITECTURE rtl OF microcontrol IS
 
-ALIAS  clk           : STD_LOGIC IS uBus.clk;
-ALIAS  clk_en        : STD_LOGIC IS uBus.clk_en;
-ALIAS  sources       : data_sources  IS uBus.sources;
-ALIAS  flags         : flag_bus      IS uBus.sources(FLAG_REG)(flag_width-1 DOWNTO 0);
+ALIAS  clk           : STD_LOGIC    IS uBus.clk;
+ALIAS  clk_en        : STD_LOGIC    IS uBus.clk_en;
+ALIAS  sources       : data_sources IS uBus.sources;
+ALIAS  flags         : flag_bus     IS uBus.sources(FLAG_REG)(flag_width-1 DOWNTO 0);
 
 SIGNAL reset         : STD_LOGIC;
 SIGNAL pause         : STD_LOGIC;
@@ -91,6 +91,8 @@ SIGNAL s            : status_register;
 SIGNAL mem_en       : STD_LOGIC;     -- select synchronous internal blockRAM
 SIGNAL ext_en       : STD_LOGIC;     -- select asynchronous external RAM
 SIGNAL reg_en       : STD_LOGIC;     -- select memory mapped register
+--SIGNAL byte_en      : STD_LOGIC;     -- select byte access
+--SIGNAL word_en      : STD_LOGIC;     -- select word access
 SIGNAL mem_wr       : STD_LOGIC;     -- output to memory
 SIGNAL mem_addr     : data_addr;     -- output to memory
 SIGNAL mem_wdata    : data_bus;      -- output to memory
@@ -158,10 +160,11 @@ progmem.read      <= pread;
 progmem.addr      <= paddr;
 progmem.wdata     <= r.nos(inst_width-1 DOWNTO 0);
 
-uCtrl.clk_en      <= clk_en;
 uCtrl.mem_en      <= mem_en;
 uCtrl.reg_en      <= reg_en;
 uCtrl.ext_en      <= ext_en;
+--uCtrl.byte_en     <= byte_en;
+--uCtrl.word_en     <= word_en;
 uCtrl.tick        <= tick;
 uCtrl.chain       <= r.chain;
 uCtrl.status      <= r.status;
@@ -289,8 +292,8 @@ interrupt_services: IF  interrupts /= 0  GENERATE
          ienable <= (OTHERS => '0');
          pending <= (OTHERS => '0');
       ELSIF  rising_edge(clk)  THEN
-         pending <= flags(pending'high DOWNTO 0) AND ienable; -- synchronized twice, flags first time
-         IF  core_en = '1'  THEN
+         IF  clk_en = '1'  THEN
+            pending <= flags(pending'high DOWNTO 0) AND ienable; -- synchronized twice, flags first time
             IF  uReg_write(uBus, INT_REG)  THEN
                IF  r.nos(r.nos'high) = '0'  THEN
                   ienable <= ienable OR  r.nos(ienable'high DOWNTO 0);
@@ -553,6 +556,8 @@ BEGIN
 
    mem_en <= '0';
    ext_en <= '0';
+--   byte_en <= '0';
+--   word_en <= '0';
    mem_wr <= '0';
    mem_addr <= rsp_addr;
    mem_wdata <= r.nos;
@@ -715,6 +720,15 @@ BEGIN
                           set_opcode(op_MEM2NOS);
                        END IF;
 
+--      WHEN op_CLOAD => push_stack;
+--                       r_in.tos <= r.tos;
+--                       mem_addr <= r.tos(mem_addr'range);
+--                       IF  ext_bRAM  THEN -- external byte addressable RAM, 3 bytes/cell
+--                          ext_en <= '1';
+--                          byte_en <= '1';
+--                          r_in.nos <= mem_rdata;
+--                       END IF;
+
       WHEN op_STORE => pop_stack;
                        r_in.tos <= r.tos;
                        mem_wr <= '1';
@@ -740,6 +754,16 @@ BEGIN
                           mem_en <= '1';
                        END IF;
 
+--      WHEN op_CSTORE => pop_stack;
+--                        r_in.tos <= r.tos;
+--                        mem_wr <= '1';
+--                        mem_wdata <= r.nos;
+--                        mem_addr <= r.tos(mem_addr'range);
+--                        IF  ext_bRAM  THEN   -- external byte addressable RAM, 3 bytes/cell
+--                           ext_en <= '1';
+--                           byte_en <= '1';
+--                       END IF;
+
       WHEN op_MEM2TOS => IF  EXTENDED  THEN
                             r_in.tos <= mem_rdata;
                          END IF;
@@ -762,6 +786,15 @@ BEGIN
                              set_opcode(op_MEM2TOS);
                           END IF;
                        END IF;
+
+--      WHEN op_CFETCH => IF  EXTENDED  THEN
+--                           mem_addr <= r.tos(mem_addr'range);
+--                           IF  ext_bRAM  THEN   -- external byte addressable RAM, 3 bytes/cell
+--                              ext_en <= '1';
+--                              byte_en <= '1';
+--                              r_in.tos <= mem_rdata;
+--                           END IF;
+--                        END IF;
 
       WHEN op_LOCAL => add_x <= r.tos - 1;
                        add_y <= rstack_addr & r.rsp(rs_addr_width-1 DOWNTO 0);

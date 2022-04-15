@@ -2,7 +2,7 @@
 \ @file : opcodes.fs
 \ ----------------------------------------------------------------------
 \
-\ Last change: KS 26.08.2021 18:52:12
+\ Last change: KS 13.03.2022 18:02:30
 \ @project: microForth/microCore
 \ @language: gforth_0.6.2
 \ @copyright (c): Free Software Foundation
@@ -53,6 +53,9 @@ op_LOCAL       Op: local   ( rel -- addr )    don't
 op_LOAD        Op: ld     ( addr -- n addr )  don't
 op_STORE       Op: st     ( n addr -- addr )  don't
             Macro: !      ( n addr -- )       comp? dbg? or IF T st drop H EXIT THEN  d! ;
+\ op_CLOAD       Op: cld   ( caddr -- c caddr ) don't
+\ op_CSTORE      Op: cst   ( c caddr -- caddr ) don't
+\             Macro: c!    ( c caddr -- )       ?comp T cst drop H ;
 
 \ program memory
 op_PLOAD       Op: pLD    ( addr -- b addr )  don't
@@ -146,6 +149,7 @@ EXTENDED [IF]
    op_INDEX       Op: I       ( -- i )               don't
                                                     
    op_FETCH       Op: @       ( addr -- u )          d@
+\   op_CFETCH      Op: c@      ( caddr -- c )         don't
    op_PLUSST      Op: +st     ( n addr -- addr )     don't                \ indivisible read-modify-write instruction
                Macro: +!      ( n addr -- )          comp? IF T +st drop H EXIT THEN  +! ;
    op_FLAGQ       Op: flag?   ( mask -- f )          don't
@@ -170,6 +174,7 @@ EXTENDED [IF]
    Macro: under   ( 1 2 -- 1 1 2 )   comp? IF T over swap H EXIT THEN  over swap ;
    Macro: rdrop   ( -- )             ?comp T r> drop H ;
    Macro: @       ( addr -- u )      comp? IF T ld drop H EXIT THEN  d@ ;
+\   Macro: c@      ( caddr -- c )     ?comp T cld drop H ;
 
 [THEN]
 

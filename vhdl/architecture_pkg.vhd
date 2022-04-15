@@ -2,7 +2,7 @@
 -- @file : architecture_pkg.vhd for the XP2-8E Demoboard
 -- ---------------------------------------------------------------------
 --
--- Last change: KS 27.08.2021 19:20:26
+-- Last change: KS 13.04.2022 17:13:10
 -- @project: microCore
 -- @language: VHDL-93
 -- @copyright (c): Klaus Schleisiek, All Rights Reserved.
@@ -24,6 +24,7 @@
 --   210     ks    8-Jun-2020  initial version
 --   2300    ks   12-Feb-2021  compiler switch WITH_PROG_RW eliminated.
 --                             STD_LOGIC_(UN)SIGNED replaced by NUMERIC_STD
+--   2332    ks   13-Apr-2022  Bugfix in semaphor_proc
 -- ---------------------------------------------------------------------
 --VHDL --~  \ at this point the cross compiler activates vhdl context.
 LIBRARY IEEE;
@@ -34,7 +35,7 @@ USE work.functions_pkg.ALL;
 PACKAGE architecture_pkg IS
 --~--  \ when loaded by the microForth cross-compiler, code between "--~" up to "--~--" will be skipped.
 
-CONSTANT version            : NATURAL := 2331; -- <major_release> <functionality_added> <HW_fix> <SW_fix> <pre-release#>
+CONSTANT version            : NATURAL := 2332; -- <major_release> <functionality_added> <HW_fix> <SW_fix> <pre-release#>
 
 -- ---------------------------------------------------------------------
 -- Configuration flags
@@ -46,7 +47,7 @@ CONSTANT SIMULATION         : BOOLEAN := false ; -- will e.g. increase the frequ
 CONSTANT COLDBOOT           : BOOLEAN := false ; -- cold boot on reset when true, else warmboot
 CONSTANT EXTENDED           : BOOLEAN := true  ; -- false -> core instruction set, true -> extended instruction set
 CONSTANT WITH_MULT          : BOOLEAN := true  ; -- true when FPGA has hardware multiply resources
-CONSTANT WITH_FLOAT         : BOOLEAN := false ; -- floating point instructions?
+CONSTANT WITH_FLOAT         : BOOLEAN := true  ; -- floating point instructions?
 CONSTANT WITH_UP_DOWNLOAD   : BOOLEAN := true  ; -- up/download via umbilical?
 
 -- ---------------------------------------------------------------------
@@ -165,7 +166,7 @@ CONSTANT max_registers            : INTEGER :=  -1;
       CONSTANT f_dsu           : NATURAL :=  2; -- set when the dsu is connected to the umbilical (no break!)
       CONSTANT f_sema          : NATURAL :=  3;
       CONSTANT f_bitout        : NATURAL :=  4;
-                                         -- gap
+   -- gap
       CONSTANT f_sw1           : NATURAL :=  8;
       CONSTANT f_sw2           : NATURAL :=  9;
       CONSTANT f_sw3           : NATURAL := 10;
@@ -223,6 +224,8 @@ TYPE  uBus_port  IS RECORD
    reg_en      : STD_LOGIC;      -- enable signal for registers
    mem_en      : STD_LOGIC;      -- enable signal for dcache and return stack
    ext_en      : STD_LOGIC;      -- enable signal for external memory and IO
+--   byte_en     : STD_LOGIC;      -- c@ and c! byte access
+--   word_en     : STD_LOGIC;      -- w@ and w! 16 bit word access
    write       : STD_LOGIC;      -- 1 => write, 0 => read
    addr        : data_addr;      -- address on uBus
    wdata       : data_bus;       -- data to memory
@@ -230,10 +233,11 @@ TYPE  uBus_port  IS RECORD
 END RECORD;
 
 TYPE  core_signals  IS RECORD
-   clk_en      : STD_LOGIC;
    reg_en      : STD_LOGIC;
    mem_en      : STD_LOGIC;
    ext_en      : STD_LOGIC;      -- enable signal for external data memory
+--   byte_en     : STD_LOGIC;
+--   word_en     : STD_LOGIC;
    tick        : STD_LOGIC;
    chain       : STD_LOGIC;
    status      : status_bus;
@@ -346,7 +350,7 @@ COMPONENT semaphor PORT (
 -- MEM     NONE          POP              PUSH             BOTH
 --  0   00 PLUSST     -0 ST            +0 LD            00 @
 --  1   00 MEM2TOR    -0 pST           +0 pLD
---  2   00 MEM2TOS
+--  2   00 MEM2TOS    \ -0 cST           +0 cLD           00 c@
 --  3   00 MEM2NOS    -0 float         +0 integ
 --  4   00 LOCAL      -0 PLUSST2       +0 index         0- rdrop
 --  5                                                   0- exit
@@ -457,7 +461,7 @@ CONSTANT op_RPUSH    : byte := "01000111";
 -- MEM POP
 CONSTANT op_STORE    : byte := "01001000";
 CONSTANT op_PSTORE   : byte := "01001001"; -- program memory store
-
+-- CONSTANT op_CSTORE   : byte := "01001010"; -- borg specific
 CONSTANT op_FLOAT    : byte := "01001011"; -- WITH_FLOAT
 CONSTANT op_PLUSST2  : byte := "01001100"; -- Extended instruction set
 
@@ -467,7 +471,7 @@ CONSTANT op_PLUSST2  : byte := "01001100"; -- Extended instruction set
 -- MEM PUSH
 CONSTANT op_LOAD     : byte := "01010000";
 CONSTANT op_PLOAD    : byte := "01010001"; -- program memory load
-
+-- CONSTANT op_CLOAD    : byte := "01010010"; -- borg specific
 CONSTANT op_INTEG    : byte := "01010011"; -- WITH_FLOAT
 CONSTANT op_INDEX    : byte := "01010100"; -- Extended instruction set
 
@@ -477,7 +481,7 @@ CONSTANT op_RTOR     : byte := "01010111";
 -- MEM BOTH
 CONSTANT op_FETCH    : byte := "01011000"; -- Extended instruction set
 
-
+-- CONSTANT op_CFETCH   : byte := "01011010"; -- borg specific
 
 CONSTANT op_RDROP    : byte := "01011100"; -- Extended instruction set
 CONSTANT op_EXIT     : byte := "01011101";
@@ -562,7 +566,7 @@ ARCHITECTURE rtl OF semaphor IS
 
 BEGIN
 
-semaphor_proc : PROCESS (uBus.clk)
+semaphor_proc : PROCESS (uBus)
 BEGIN
    IF  uBus.reset = '1' AND ASYNC_RESET  THEN
       sema <= '0';
@@ -570,7 +574,7 @@ BEGIN
       IF  uReg_write(uBus, FLAG_REG) AND (uBus.wdata(signbit) XOR uBus.wdata(flag)) = '1'  THEN
          sema <= uBus.wdata(flag);
       END IF;
-      IF  uReg_write(uBus, reg)  THEN
+      IF  uReg_write(uBus, reg) AND uBus.pause = '0'  THEN
          sema <= '1';
       ELSIF  uReg_read(uBus, reg) AND uBus.pause = '0'  THEN
          sema <= '0';
