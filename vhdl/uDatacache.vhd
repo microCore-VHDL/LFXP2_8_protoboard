@@ -39,6 +39,8 @@ ENTITY uDatacache IS PORT (
 ARCHITECTURE rtl OF uDatacache IS
 
 ALIAS clk        : STD_LOGIC IS uBus.clk;
+ALIAS clk_en     : STD_LOGIC IS uBus.clk_en;
+ALIAS mem_en     : STD_LOGIC IS uBus.mem_en;
 ALIAS write      : STD_LOGIC IS uBus.write;
 ALIAS addr       : data_addr IS uBus.addr;
 ALIAS wdata      : data_bus  IS uBus.wdata;
@@ -51,7 +53,7 @@ SIGNAL enable    : STD_LOGIC;
 
 BEGIN
 
-enable <= uBus.clk_en AND uBus.mem_en WHEN  uBus.ext_en = '0'  ELSE '0';
+enable <= clk_en AND mem_en;
 
 make_sim_mem: IF  SIMULATION  GENERATE
 
@@ -83,6 +85,7 @@ END GENERATE make_sim_mem; make_syn_mem: IF  NOT SIMULATION  GENERATE
       addra   => addr(cache_addr_width-1 DOWNTO 0),
       dia     => wdata,
       doa     => rdata,
+   -- dma port
       enb     => dma_enable,
       web     => dma_write,
       addrb   => dma_addr(cache_addr_width-1 DOWNTO 0),

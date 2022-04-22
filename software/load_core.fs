@@ -35,7 +35,7 @@ include coretest.fs
 
 init: init-leds ( -- )  0 Leds ! ;
 
-: boot  ( -- )   0 #cache erase   CALL initialization  debug-service ;
+: boot  ( -- )   0 #cache erase   CALL initialization   debug-service ;
 
 #reset TRAP: rst    ( -- )            boot                 ;  \ compile branch to boot at reset vector location
 #isr   TRAP: isr    ( -- )            interrupt IRET       ;

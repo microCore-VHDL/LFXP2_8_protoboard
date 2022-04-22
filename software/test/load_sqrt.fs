@@ -1,5 +1,5 @@
 \
-\ Last change: KS 13.03.2021 19:16:55
+\ Last change: KS 17.04.2022 19:08:47
 \
 \ MicroCore load screen for the core test program that is transferred
 \ into the program memory via the debug umbilical
@@ -34,7 +34,7 @@ library forth_lib.fs
 \ Interrupt
 \ ----------------------------------------------------------------------
 
-: interrupt ( -- )  intflags drop ;
+: interrupt ( -- )  Intflags @ drop ;
 
 \ ----------------------------------------------------------------------
 \ Booting and TRAPs

@@ -1,5 +1,5 @@
 \ 
-\ Last change: KS 13.12.2020 16:15:33
+\ Last change: KS 17.04.2022 19:08:34
 \
 \ MicroCore load screen for the core test program that is transferred
 \ into the program memory via the debug umbilical
@@ -67,7 +67,7 @@ Variable Divisor
 \ Interrupt
 \ ----------------------------------------------------------------------
 
-: interrupt ( -- )  intflags drop ;
+: interrupt ( -- )  Intflags @ drop ;
 
 \ ----------------------------------------------------------------------
 \ Booting and TRAPs

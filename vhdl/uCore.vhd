@@ -20,7 +20,7 @@
 --
 -- Version Author   Date       Changes
 --   210     ks    8-Jun-2020  initial version
---   2300    ks    8-Mar-2021  compiler switch WITH_PROG_RW eliminated
+--  2300     ks    8-Mar-2021  compiler switch WITH_PROG_RW eliminated
 --                             Conversion to NUMERIC_STD
 --  2332     ks   13-Apr-2022  enable_proc moved to fpga.vhd
 -- ---------------------------------------------------------------------

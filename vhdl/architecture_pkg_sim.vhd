@@ -2,7 +2,7 @@
 -- @file : architecture_pkg_sim.vhd for the XP2-8E Demoboard
 -- ---------------------------------------------------------------------
 --
--- Last change: KS 13.04.2022 17:13:10
+-- Last change: KS 21.04.2022 19:32:41
 -- @project: microCore
 -- @language: VHDL-93
 -- @copyright (c): Klaus Schleisiek, All Rights Reserved.
@@ -35,7 +35,7 @@ USE work.functions_pkg.ALL;
 PACKAGE architecture_pkg IS
 --~--  \ when loaded by the microForth cross-compiler, code between "--~" up to "--~--" will be skipped.
 
-CONSTANT version            : NATURAL := 2332; -- <major_release> <functionality_added> <HW_fix> <SW_fix> <pre-release#>
+CONSTANT version            : NATURAL := 2342; -- <major_release> <functionality_added> <HW_fix> <SW_fix> <pre-release#>
 
 -- ---------------------------------------------------------------------
 -- Configuration flags
@@ -568,7 +568,7 @@ BEGIN
 
 semaphor_proc : PROCESS (uBus)
 BEGIN
-   IF  uBus.reset = '1' AND ASYNC_RESET  THEN
+   IF  uBus.reset = '1' AND async_reset  THEN
       sema <= '0';
    ELSIF  rising_edge(uBus.clk)  THEN
       IF  uReg_write(uBus, FLAG_REG) AND (uBus.wdata(signbit) XOR uBus.wdata(flag)) = '1'  THEN
@@ -579,7 +579,7 @@ BEGIN
       ELSIF  uReg_read(uBus, reg) AND uBus.pause = '0'  THEN
          sema <= '0';
       END IF;
-      IF  uBus.reset = '1' AND NOT ASYNC_RESET  THEN
+      IF  uBus.reset = '1' AND NOT async_reset  THEN
          sema <= '0';
       END IF;
    END IF;

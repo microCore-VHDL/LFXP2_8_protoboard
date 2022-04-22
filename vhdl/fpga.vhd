@@ -2,7 +2,7 @@
 -- @file : fpga.vhd for the Lattice XP2 Demoboard
 -- ---------------------------------------------------------------------
 --
--- Last change: KS 02.04.2021 18:34:55
+-- Last change: KS 21.04.2022 19:42:05
 -- @project: microCore
 -- @language: VHDL-93
 -- @copyright (c): Klaus Schleisiek, All Rights Reserved.
@@ -125,6 +125,7 @@ SIGNAL core         : core_signals;
 SIGNAL flags        : flag_bus;
 SIGNAL flags_pause  : STD_LOGIC;
 SIGNAL ctrl         : UNSIGNED(ctrl_width-1 DOWNTO 0);
+SIGNAL flag_sema    : STD_LOGIC;    -- a software semaphor for testing
 SIGNAL memory       : datamem_port; -- multiplexed memory signals
 
 -- data memory
@@ -163,7 +164,7 @@ SIGNAL SRAM_delay   : STD_LOGIC;
 
 -- board specific IO
 SIGNAL leds         : byte;
-SIGNAL time_int     : STD_LOGIC;
+SIGNAL int_time     : STD_LOGIC;
 SIGNAL ioreg        : UNSIGNED(14 DOWNTO 0);
 
 BEGIN
@@ -210,6 +211,16 @@ synch_interrupt: synchronize_n PORT MAP(clk, int_n,   flags(i_ext));
 flags         <= (OTHERS => 'L');
 -- synopsys translate_on
 
+flags(i_time)   <= int_time;
+flags(f_dsu)    <= NOT dsu_break; -- '1' if debug terminal present
+flags(f_sema)   <= flag_sema;
+flags(f_bitout) <= ctrl(c_bitout);    -- for coretest
+flags(f_sw1)    <= NOT switch_n(0);
+flags(f_sw2)    <= NOT switch_n(1);
+flags(f_sw3)    <= NOT switch_n(2);
+flags(f_sw4)    <= NOT switch_n(3);
+
+
 ------------------------------------------------------------------------
 -- ctrl-register (bitwise)
 -- ---------------------------------------------------------------------
@@ -231,24 +242,22 @@ BEGIN
    END IF;
 END PROCESS ctrl_proc;
 
-flags(f_bitout) <= ctrl(c_bitout);
-
 -- ---------------------------------------------------------------------
 -- software semaphor f_sema using flag register
 -- ---------------------------------------------------------------------
 
-sema_proc : PROCESS (clk, reset)
+sema_proc: PROCESS (clk, reset)
 BEGIN
    IF  reset = '1' AND ASYNC_RESET  THEN
-      flags(f_sema) <= '0';
+      flag_sema <= '0';
    ELSIF  rising_edge(clk)  THEN
       IF  uReg_write(uBus, FLAG_REG)  THEN
          IF  (uBus.wdata(signbit) XOR uBus.wdata(f_sema)) = '1'  THEN
-            flags(f_sema) <= uBus.wdata(f_sema);
+            flag_sema <= uBus.wdata(f_sema);
          END IF;
       END IF;
       IF  reset = '1' AND NOT ASYNC_RESET  THEN
-         flags(f_sema) <= '0';
+         flag_sema <= '0';
       END IF;
    END IF;
 END PROCESS sema_proc;
@@ -260,8 +269,6 @@ flags_pause <= '1' WHEN  uReg_write(uBus, FLAG_REG) AND uBus.wdata(signbit) = '0
 -- ---------------------------------------------------------------------
 -- microcore interface
 -- ---------------------------------------------------------------------
-
-flags(f_dsu) <= NOT dsu_break; -- '1' if debug terminal present
 
 uCore: microcore PORT MAP (
    uBus       => uBus,
@@ -414,23 +421,16 @@ uBus.sources(LED_REG) <= resize(leds, data_width);
 leds_n(leds_n'high DOWNTO 1) <= NOT leds(leds_n'high DOWNTO 1);
 leds_n(0) <= NOT Ctrl(c_bitout) WHEN  SIMULATION  ELSE  NOT leds(0);
 
-flags(f_sw1) <= NOT switch_n(0);
-flags(f_sw2) <= NOT switch_n(1);
-flags(f_sw3) <= NOT switch_n(2);
-flags(f_sw4) <= NOT switch_n(3);
-
-time_int_proc : PROCESS (clk)
+int_time_proc : PROCESS (clk)
 BEGIN
    IF  rising_edge(clk)  THEN
       IF  uBus.tick = '1'  THEN
-         time_int <= '1';
+         int_time <= '1';
       END IF;
       IF  uReg_write(uBus, FLAG_REG) AND uBus.wdata(signbit) = '1' AND uBus.wdata(i_time) = '0'  THEN
-         time_int <= '0';
+         int_time <= '0';
       END IF;
    END IF;
-END PROCESS time_int_proc;
-
-flags(i_time) <= time_int;
+END PROCESS int_time_proc;
 
 END technology;

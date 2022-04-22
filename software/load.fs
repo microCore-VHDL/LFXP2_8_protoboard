@@ -1,5 +1,5 @@
 \
-\ Last change: KS 14.04.2022 17:41:22
+\ Last change: KS 17.04.2022 18:56:27
 \
 \ Basic microCore load screen for execution on the target.
 \
@@ -31,7 +31,7 @@ library forth_lib.fs  preload ,
 
 Variable Ticker  0 Ticker !
 
-: interrupt ( -- )  intflags
+: interrupt ( -- )  Intflags @
    #i-time and IF  1 Ticker +!  #i-time not Flag-reg !  THEN
 ;
 init: init-int  ( -- )  #i-time int-enable ei ;

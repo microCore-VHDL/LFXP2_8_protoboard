@@ -1,5 +1,5 @@
 \ 
-\ Last change: KS 13.03.2021 19:16:35
+\ Last change: KS 17.04.2022 19:08:38
 \
 \ MicroCore load screen for testing Create ... Does
 \
@@ -44,7 +44,7 @@ $4321 Object Das
 
 Variable Ticker  0 Ticker !
 
-: interrupt ( -- )  intflags
+: interrupt ( -- )  Intflags @
    #i-time and IF  1 Ticker +!  #i-time not Flag-reg !  THEN
 ;
 init: init-int  ( -- )  0 Leds !  #i-time int-enable ei ;

@@ -1,5 +1,5 @@
 \
-\ Last change: KS 13.03.2021 19:11:11
+\ Last change: KS 17.04.2022 19:08:00
 \
 \ MicroCore load screen for execution on the target.
 \ Floating point library package.
@@ -67,7 +67,7 @@ B-factor -T0 f/ R0 fln f+ fexp Constant R-lim
 \ Interrupt
 \ ----------------------------------------------------------------------
 
-: interrupt ( -- )  intflags drop ;
+: interrupt ( -- )  Intflags @ drop ;
 
 \ ----------------------------------------------------------------------
 \ Booting and TRAPs

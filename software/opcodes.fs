@@ -2,7 +2,7 @@
 \ @file : opcodes.fs
 \ ----------------------------------------------------------------------
 \
-\ Last change: KS 13.03.2022 18:02:30
+\ Last change: KS 17.04.2022 18:49:02
 \ @project: microForth/microCore
 \ @language: gforth_0.6.2
 \ @copyright (c): Free Software Foundation
@@ -205,22 +205,24 @@ Macro: pause   ( -- )             ; \ this pause will be used when the multitask
 Macro: true    ( -- tf )          comp? IF -1 lit,  EXIT THEN  true ;
 Macro: false   ( -- ff )          comp? IF  0 lit,  EXIT THEN  false ;
 
-Macro: 1+      ( u -- u' )        comp? IF   1 lit, T + H EXIT THEN  1+ ;
+Macro: 1+      ( n -- n' )        comp? IF   1 lit, T + H EXIT THEN  1+ ;
 Macro: 1-      ( n -- n' )        comp? IF  -1 lit, T + H EXIT THEN  1- ;
+
+Macro: cells   ( u -- u' )        ;
+Macro: cell+   ( u -- u' )        comp? IF   1 lit, T + H EXIT THEN  1+ ;
+Macro: cell-   ( u -- u' )        comp? IF  -1 lit, T + H EXIT THEN  1- ;
 
 Macro: ei          ( -- )         ?comp s_ie 2**     lit, T st-set H ; \ 1 -> #ie bit
 Macro: di          ( -- )         ?comp s_ie 2** not lit, T st-set H ; \ 0 -> #ie bit
 
-Macro: intflags    ( -- flags )   ?comp INT_REG lit, T @ H ;
 Macro: int-enable  ( mask -- )    ?comp INT_REG lit, T ! H ;
 Macro: int-disable ( mask -- )    ?comp T not H INT_REG lit, T ! H ;
 
-Macro: flags   ( -- flags )       ?comp FLAG_REG lit, T @ H ;
 Macro: pass    ( n -- )           ?comp FLAG_REG lit, T ! H ;            \ lock semaphor bit
 Macro: release ( n -- )           ?comp T not H FLAG_REG lit, T ! H ;    \ release semaphor bit
 
-Macro: host>   ( -- w )           ?comp DEBUG_REG lit, T @ H ;
-Macro: >host   ( w -- )           ?comp DEBUG_REG lit, T ! H ;
+Macro: host>   ( -- u )           ?comp DEBUG_REG lit, T @ H ;
+Macro: >host   ( u -- )           ?comp DEBUG_REG lit, T ! H ;
 
 Macro: ctrl    ( -- reg )         ?comp CTRL_REG lit, ;
 Macro: -ctrl   ( n -- -n reg )    ?comp T not H CTRL_REG lit, ;

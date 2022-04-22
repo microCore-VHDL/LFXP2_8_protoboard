@@ -1,5 +1,5 @@
 \
-\ Last change: KS 13.03.2021 19:11:12
+\ Last change: KS 17.04.2022 19:08:42
 \
 \ Basic microCore load screen for execution on the target.
 \
@@ -67,7 +67,7 @@ Point Object Punkt   init: init-Punkt ( -- )   1 2 Punkt set ;
 
 Variable Ticker  0 Ticker !
 
-: interrupt ( -- )  intflags
+: interrupt ( -- )  Intflags @
    #i-time and IF  1 Ticker +!  #i-time not Flag-reg !  THEN
 ;
 init: init-int  ( -- )  #i-time int-enable ei ;
