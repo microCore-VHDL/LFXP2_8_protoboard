@@ -2,7 +2,7 @@
 \ @file : umbilical.fs
 \ ----------------------------------------------------------------------
 \
-\ Last change: KS 24.03.2021 17:54:56
+\ Last change: KS 01.05.2022 10:43:01
 \ @project: microForth/microCore
 \ @language: gforth_0.6.2
 \ @copyright (c): Free Software Foundation
@@ -31,8 +31,8 @@
 \ ----------------------------------------------------------------------
 SIMULATION [NOTIF]
 
- include rs232_linux.fs     B115200 Umbilical: /dev/ttyUSB0
-\ include rs232_windows.fs   B115200 Umbilical: COM3
+\  include rs232_linux.fs     B115200 Umbilical: /dev/ttyUSB0
+include rs232_windows.fs   B115200 Umbilical: COM3
 \ include rs232_macosx.fs    B115200 Umbilical: /dev/cu.usbserial
 
 [THEN]

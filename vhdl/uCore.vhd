@@ -196,8 +196,6 @@ uCntrl: microcontrol PORT MAP (
 core.reg_en    <= uCtrl.reg_en;
 core.mem_en    <= uCtrl.mem_en OR deb_denable;
 core.ext_en    <= uCtrl.ext_en OR deb_ext_en;
---core.byte_en   <= uCtrl.byte_en;
---core.word_en   <= uCtrl.word_en;
 core.tick      <= uCtrl.tick;
 core.chain     <= uCtrl.chain;
 core.status    <= uCtrl.status;

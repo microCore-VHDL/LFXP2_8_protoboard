@@ -7,7 +7,7 @@
 \ 'coretest' should finish with 'message: $100'.
 \ Any other number is an error number, which can be located in coretest.fs
 \
-Only Forth also definitions 
+Only Forth also definitions hex
 
 [IFDEF] unpatch     unpatch    [ENDIF]
 [IFDEF] close-port  close-port [ENDIF]

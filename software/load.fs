@@ -1,5 +1,5 @@
 \
-\ Last change: KS 17.04.2022 18:56:27
+\ Last change: KS 04.06.2022 18:04:09
 \
 \ Basic microCore load screen for execution on the target.
 \
@@ -22,7 +22,7 @@ Target new initialized          \ go into target compilation mode and initialize
 
 include constants.fs            \ MicroCore Register addresses and bits
 include debugger.fs
-library forth_lib.fs  preload ,
+library forth_lib.fs  
 \ library task_lib.fs   preload pause
 
 \ ----------------------------------------------------------------------
@@ -32,7 +32,7 @@ library forth_lib.fs  preload ,
 Variable Ticker  0 Ticker !
 
 : interrupt ( -- )  Intflags @
-   #i-time and IF  1 Ticker +!  #i-time not Flag-reg !  THEN
+   #i-time and IF  1 Ticker +!  #i-time not Flags !  THEN
 ;
 init: init-int  ( -- )  #i-time int-enable ei ;
 

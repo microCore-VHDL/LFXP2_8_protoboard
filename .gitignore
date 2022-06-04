@@ -96,3 +96,11 @@ synplify/synwork/
 synplify/dm/
 
 *.edn
+
+modelSim/transcript
+
+*.wlf
+
+*.mti
+
+*.mem

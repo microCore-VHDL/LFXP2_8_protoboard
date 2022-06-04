@@ -1,5 +1,5 @@
 \
-\ Last change: KS 21.07.2021 19:17:31
+\ Last change: KS 04.06.2022 18:30:59
 \
 \ MicroCore load screen to test all aspects of the multitasker.
 \ Use  .tasks and .semas to observe the state of the system.
@@ -23,7 +23,7 @@ Target new initialized          \ go into target compilation mode and initialize
 
 include constants.fs            \ MicroCore Register addresses and bits
 include debugger.fs
-library forth_lib.fs preload ,
+library forth_lib.fs 
 library task_lib.fs  preload pause
 
 Task Blinker
@@ -56,7 +56,7 @@ Variable Waits
 
 : waittask   ( -- )     Waits  BEGIN  Mailbox wait   dup inc  REPEAT ;
 
-: itime-reset  ( -- )   #i-time not Flag-reg ! ;
+: itime-reset  ( -- )   #i-time not Flags ! ;
 
 : gowait     ( -- )     mailbox-init   Blinker ['] waittask activate
                         itime-reset   0  dup Signals !  Waits !   ei

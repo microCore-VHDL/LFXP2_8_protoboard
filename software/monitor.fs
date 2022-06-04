@@ -2,7 +2,7 @@
 \ @file : monitor.fs
 \ ----------------------------------------------------------------------
 \
-\ Last change: KS 16.03.2022 18:59:36
+\ Last change: KS 04.06.2022 19:21:48
 \ @project: microForth/microCore
 \ @language: gforth_0.6.2
 \ @copyright (c): Free Software Foundation
@@ -73,7 +73,3 @@ Variable tmpTOR
 : \@      ( addr -- n )       @ ;
 : \!      ( n addr -- )       ! ;
 : \does   ( addr -- addr+1 )  H op_DOES t, T ;
-HAVE c@ [IF]
-: \c@     ( caddr -- c )      c@ ;
-[THEN]
-
