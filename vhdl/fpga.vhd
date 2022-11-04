@@ -2,7 +2,7 @@
 -- @file : fpga.vhd for the Lattice XP2 Demoboard
 -- ---------------------------------------------------------------------
 --
--- Last change: KS 21.04.2022 19:42:05
+-- Last change: KS 31.10.2022 19:11:44
 -- @project: microCore
 -- @language: VHDL-93
 -- @copyright (c): Klaus Schleisiek, All Rights Reserved.
@@ -24,6 +24,7 @@
 --   210     ks    8-Jun-2020  initial version
 --  2300     ks    8-Mar-2021  converted to NUMERIC_STD
 --  2332     ks   13-Apr-2022  enable_proc moved from uCore.vhd
+--  2400     ks   03-Nov-2022  byte addressing using byte_addr_width
 -- ---------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
@@ -36,7 +37,7 @@ ENTITY fpga IS PORT (
    clock       : IN    STD_LOGIC; -- external clock input
 -- Demoboard specific pins
    int_n       : IN    STD_LOGIC; -- external interrupt input
-   io          : OUT   UNSIGNED(17 DOWNTO 0);
+   io          : OUT   UNSIGNED(9 DOWNTO 0);
    leds_n      : OUT   byte;
    switch_n    : IN    UNSIGNED(3 DOWNTO 0);
 -- external SRAM
@@ -69,7 +70,7 @@ ATTRIBUTE LOC      OF int_n       : SIGNAL IS "104";
    ATTRIBUTE PULLMODE OF int_n    : SIGNAL IS "UP";
    ATTRIBUTE IO_TYPE  OF int_n    : SIGNAL IS "LVCMOS33";
 
-ATTRIBUTE LOC      OF io          : SIGNAL IS "51, 46, 44, 42, 40, 36, 34, 32, 30, 52, 47, 45, 43, 41, 39, 35, 33, 31";
+ATTRIBUTE LOC      OF io          : SIGNAL IS "51, 46, 44, 42, 40, 36, 34, 32, 30, 52";
    ATTRIBUTE PULLMODE OF io       : SIGNAL IS "NONE";
    ATTRIBUTE IO_TYPE  OF io       : SIGNAL IS "LVCMOS33";
    ATTRIBUTE DRIVE    OF io       : SIGNAL IS "8";
@@ -165,7 +166,7 @@ SIGNAL SRAM_delay   : STD_LOGIC;
 -- board specific IO
 SIGNAL leds         : byte;
 SIGNAL int_time     : STD_LOGIC;
-SIGNAL ioreg        : UNSIGNED(14 DOWNTO 0);
+SIGNAL ioreg        : UNSIGNED(9 DOWNTO 0);
 
 BEGIN
 
@@ -212,7 +213,7 @@ flags         <= (OTHERS => 'L');
 -- synopsys translate_on
 
 flags(i_time)   <= int_time;
-flags(f_dsu)    <= NOT dsu_break; -- '1' if debug terminal present
+flags(f_dsu)    <= NOT dsu_break;     -- '1' if debug terminal present
 flags(f_sema)   <= flag_sema;
 flags(f_bitout) <= ctrl(c_bitout);    -- for coretest
 flags(f_sw1)    <= NOT switch_n(0);
@@ -291,7 +292,7 @@ uBus.tick                 <= core.tick;
 -- registers
 uBus.sources(STATUS_REG)  <= resize(core.status, data_width);
 uBus.sources(DSP_REG)     <= resize(core.dsp, data_width);
-uBus.sources(RSP_REG)     <= addr_rstack_v(data_width-1 DOWNTO rsp_width) & core.rsp;
+uBus.sources(RSP_REG)     <= resize(core.rsp, data_width);
 uBus.sources(INT_REG)     <= resize(core.int, data_width);
 uBus.sources(FLAG_REG)    <= resize(flags, data_width);
 uBus.sources(VERSION_REG) <= to_unsigned(version, data_width);
@@ -302,8 +303,7 @@ uBus.sources(CTRL_REG)    <= resize(ctrl, data_width);
 uBus.reg_en               <= core.reg_en;
 uBus.mem_en               <= core.mem_en;
 uBus.ext_en               <= core.ext_en;
--- uBus.byte_en              <= core.byte_en;
--- uBus.word_en              <= core.word_en;
+uBus.bytes                <= memory.bytes;
 uBus.write                <= memory.write;
 uBus.addr                 <= memory.addr;
 uBus.wdata                <= memory.wdata;
@@ -313,10 +313,11 @@ uBus.rdata                <= mem_rdata;
 -- data memory consisting of dcache, ext_mem, and debugmem
 -- ---------------------------------------------------------------------
 
-dma_mem.enable <= '0';
-dma_mem.write  <= '0';
-dma_mem.addr   <= (OTHERS => '0');
-dma_mem.wdata  <= (OTHERS => '0');
+dma_mem.enable   <= '0';
+dma_mem.write    <= '0';
+dma_mem.bytes    <= 0;
+dma_mem.addr     <= (OTHERS => '0');
+dma_mem.wdata    <= (OTHERS => '0');
 
 internal_data_mem: uDatacache PORT MAP (
    uBus         => uBus,
@@ -350,7 +351,7 @@ END PROCESS memaddr_proc;
 with_external_mem: IF  WITH_EXTMEM  GENERATE
 
    SRAM: external_SRAM
-   GENERIC MAP (ram_addr_width, ram_data_width, 1)
+   GENERIC MAP (ram_addr_width, ram_data_width, 2)
    PORT MAP (
       uBus        => uBus,
       ext_rdata   => ext_rdata,
@@ -380,7 +381,7 @@ END GENERATE no_external_mem;
 -- XP2_8_protoboard specific IO
 -- ---------------------------------------------------------------------
 
-io <= "000" & ioreg;
+io <= ioreg;
 
 ioreg_proc : PROCESS (clk)
 BEGIN
@@ -389,9 +390,9 @@ BEGIN
    ELSIF  rising_edge(clk)  THEN
       IF  uReg_write(uBus, IO_REG)  THEN
          IF  uBus.wdata(signbit) = '1'  THEN
-            ioreg <= ioreg AND uBus.wdata(14 DOWNTO 0);
+            ioreg <= ioreg AND uBus.wdata(9 DOWNTO 0);
          ELSE
-            ioreg <= ioreg OR  uBus.wdata(14 DOWNTO 0);
+            ioreg <= ioreg OR  uBus.wdata(9 DOWNTO 0);
          END IF;
       END IF;
       IF  reset = '1' AND NOT ASYNC_RESET  THEN
@@ -418,8 +419,16 @@ END PROCESS led_proc;
 
 uBus.sources(LED_REG) <= resize(leds, data_width);
 
-leds_n(leds_n'high DOWNTO 1) <= NOT leds(leds_n'high DOWNTO 1);
-leds_n(0) <= NOT Ctrl(c_bitout) WHEN  SIMULATION  ELSE  NOT leds(0);
+simulating: IF  SIMULATION  GENERATE
+
+leds_n(7 DOWNTO 1) <= NOT leds(7 DOWNTO 1);
+leds_n(0)          <= NOT Ctrl(c_bitout);
+
+END GENERATE simulating; executing: IF  NOT SIMULATION  GENERATE
+
+leds_n <= NOT leds;
+
+END GENERATE executing;
 
 int_time_proc : PROCESS (clk)
 BEGIN

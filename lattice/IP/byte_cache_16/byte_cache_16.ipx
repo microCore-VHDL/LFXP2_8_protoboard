@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DiamondModule name="byte_cache_16" module="RAM_DP_TRUE" VendorName="Lattice Semiconductor Corporation" generator="IPexpress" date="2022 07 10 18:45:05.831" version="7.5" type="Module" synthesis="synplify" source_format="VHDL">
+  <Package>
+		<File name="" type="" modified="2022 07 10 18:45:09.983"/>
+		<File name="byte_cache_16.lpc" type="lpc" modified="2022 07 10 18:45:01.071"/>
+		<File name="byte_cache_16.vhd" type="top_level_vhdl" modified="2022 07 10 18:45:01.147"/>
+		<File name="byte_cache_16_tmpl.vhd" type="template_vhdl" modified="2022 07 10 18:45:01.151"/>
+		<File name="tb_byte_cache_16_tmpl.vhd" type="testbench_vhdl" modified="2022 07 10 18:45:01.155"/>
+  </Package>
+</DiamondModule>

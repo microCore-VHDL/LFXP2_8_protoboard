@@ -1,5 +1,5 @@
-\
-\ Last change: KS 04.06.2022 18:04:09
+\ 
+\ Last change: KS 07.10.2022 12:04:01
 \
 \ Basic microCore load screen for execution on the target.
 \
@@ -13,36 +13,37 @@ include extensions.fs           \ Some System word (re)definitions
 include ../vhdl/architecture_pkg.vhd
 include microcross.fs           \ the cross-compiler
 
-\ Verbose on
+\ Verbose on                      \ Library loading messages
 
 Target new initialized          \ go into target compilation mode and initialize target compiler
 
-8 trap-addr code-origin
+6 trap-addr code-origin
           0 data-origin
 
 include constants.fs            \ MicroCore Register addresses and bits
 include debugger.fs
-library forth_lib.fs  
-\ library task_lib.fs   preload pause
+library forth_lib.fs
 
-\ ----------------------------------------------------------------------
-\ Interrupt
-\ ----------------------------------------------------------------------
-
-Variable Ticker  0 Ticker !
-
-: interrupt ( -- )  Intflags @
-   #i-time and IF  1 Ticker +!  #i-time not Flags !  THEN
-;
-init: init-int  ( -- )  #i-time int-enable ei ;
-
+WITH_BYTES [IF]
+    : cfill   here $20 FOR  r@ swap cst 1+  NEXT  drop ;
+    Host
+    : cfill   pad $20 1 DO  I over c! 1+ LOOP  drop ;
+    Target
+[ELSE]
+    : cfill   here $20 FOR  r@ swap st 1+  NEXT  drop ;
+    Host
+    : cfill   pad $20 1 DO  I over ! cell+ LOOP  drop ;
+    Target
+[THEN]
 \ ----------------------------------------------------------------------
 \ Booting and TRAPs
 \ ----------------------------------------------------------------------
 
+: interrupt ( -- ) Intflags @ drop ;
+
 init: init-leds ( -- )  0 Leds ! ;
 
-: boot  ( -- )   0 #cache erase   CALL initialization  debug-service ;
+: boot  ( -- )     0 #cache erase   CALL initialization   debug-service ;
 
 #reset TRAP: rst    ( -- )            boot                 ;  \ compile branch to boot at reset vector location
 #isr   TRAP: isr    ( -- )            interrupt IRET       ;

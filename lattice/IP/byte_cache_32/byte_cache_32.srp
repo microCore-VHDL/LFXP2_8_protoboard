@@ -1,0 +1,34 @@
+SCUBA, Version Diamond (64-bit) 3.11.3.469
+Thu Jun 09 19:08:05 2022
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2020 Lattice Semiconductor Corporation,  All rights reserved.
+
+    Issued command   : C:\lscc\diamond\3.11_x64\ispfpga\bin\nt64\scuba.exe -w -n byte_cache_32 -lang vhdl -synth synplify -bus_exp 7 -bb -arch mg5a00 -type ramdq -device LFXP2-8E -addr_width 12 -data_width 32 -num_words 3072 -writemode NORMAL -resetmode SYNC -byte 8 -cascade -1 
+    Circuit name     : byte_cache_32
+    Module type      : RAM_DQ
+    Module Version   : 7.5
+    Ports            : 
+	Inputs       : Clock, ClockEn, Reset, ByteEn[3:0], WE, Address[11:0], Data[31:0]
+	Outputs      : Q[31:0]
+    I/O buffer       : not inserted
+    EDIF output      : byte_cache_32.edn
+    VHDL output      : byte_cache_32.vhd
+    VHDL template    : byte_cache_32_tmpl.vhd
+    VHDL testbench    : tb_byte_cache_32_tmpl.vhd
+    VHDL purpose     : for synthesis and simulation
+    Bus notation     : big endian
+    Report output    : byte_cache_32.srp
+    Element Usage    :
+           AND2 : 1
+        FD1P3DX : 2
+            INV : 1
+          MUX41 : 32
+         DP16KB : 6
+    Estimated Resource Usage:
+            LUT : 33
+            EBR : 6
+            Reg : 2

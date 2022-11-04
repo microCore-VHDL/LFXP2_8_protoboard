@@ -1,5 +1,5 @@
 \ 
-\ Last change: KS 04.06.2022 18:30:16
+\ Last change: KS 03.08.2022 18:05:59
 \
 \ MicroCore load screen for testing Create ... Does
 \
@@ -29,13 +29,15 @@ Variable Link  0 Link !
 Host: Obconst ( n -- )  T Create  ,                        Does> @ . ;
 Host: Object  ( n -- )  T Create  ,  here Link @ , Link !  Does> @   ;
 
-: .link  ( -- )   Link BEGIN @ ?dup WHILE dup 1- @ .  REPEAT ;
+: .link  ( -- )   Link BEGIN @ ?dup WHILE dup cell- dup . @ . $20 emit  REPEAT ;
 
 $1234 Object Dies
 $5555 Obconst Und
 $4321 Object Das
 
 : test ( -- )  Dies . ;
+
+WITH_BYTES [IF]   Create Einzeln  $98 c, $22 c,   [THEN]
 
 \ ----------------------------------------------------------------------
 \ Interrupt
@@ -46,11 +48,13 @@ Variable Ticker  0 Ticker !
 : interrupt ( -- )  Intflags @
    #i-time and IF  1 Ticker +!  #i-time not Flags !  THEN
 ;
-init: init-int  ( -- )  0 Leds !  #i-time int-enable ei ;
+init: init-int  ( -- )  #i-time int-enable ei ;
 
 \ ----------------------------------------------------------------------
 \ Booting and TRAPs
 \ ----------------------------------------------------------------------
+
+init: init-leds  ( -- )   0 Leds ! ;
 
 : boot  ( -- )   0 #cache erase   CALL initialization  debug-service ;
 

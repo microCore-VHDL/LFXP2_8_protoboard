@@ -31,8 +31,8 @@
 \ ----------------------------------------------------------------------
 SIMULATION [NOTIF]
 
-\  include rs232_linux.fs     B115200 Umbilical: /dev/ttyUSB0
-include rs232_windows.fs   B115200 Umbilical: COM3
+  include rs232_linux.fs     B115200 Umbilical: /dev/ttyUSB0
+\ include rs232_windows.fs   B115200 Umbilical: COM3
 \ include rs232_macosx.fs    B115200 Umbilical: /dev/cu.usbserial
 
 [THEN]

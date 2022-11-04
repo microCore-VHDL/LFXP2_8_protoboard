@@ -2,7 +2,7 @@
 \ @file : bootload.fs
 \ ----------------------------------------------------------------------
 \
-\ Last change: KS 05.04.2021 16:44:55
+\ Last change: KS 16.07.2022 17:20:06
 \ @project: microForth/microCore
 \ @language: gforth_0.6.2
 \ @copyright (c): Free Software Foundation
@@ -52,8 +52,7 @@ include constants.fs            \ microCore Register addresses and bits
       6 FOR   2* dup leds !  delay  NEXT
       6 FOR  u2/ dup leds !  delay  NEXT
    REPEAT
-; noexit
-
+;
 #reset TRAP: rst ( -- )    blinking ;
 
 end

@@ -1,8 +1,6 @@
 ###==== BEGIN Header
 
 # Synopsys, Inc. constraint file
-# D:/technik/microcore/hardware/xp2_8_protoboard/synplify/core_lattice.fdc
-# Written on Fri Apr  2 17:59:47 2021
 # by Synplify Pro (R), M-2017.03L-SP1-1 FDC Constraint Editor
 
 # Custom constraint commands may be added outside of the SCOPE tab sections bounded with BEGIN/END.

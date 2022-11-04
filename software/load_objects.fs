@@ -1,5 +1,5 @@
 \
-\ Last change: KS 01.06.2022 23:10:10
+\ Last change: KS 03.08.2022 18:06:08
 \
 \ Basic microCore load screen for execution on the target.
 \
@@ -9,7 +9,7 @@ Only Forth also definitions hex
 [IFDEF] close-port  close-port [ENDIF]
 [IFDEF] microcore   microcore  [ENDIF]   Marker microcore
 
-include extensions.fs           \ Some System word (re)definitions
+include extensions.fs           \ Some System word (re)definitions for a more sympathetic environment
 include ../vhdl/architecture_pkg.vhd
 include microcross.fs           \ the cross-compiler
 
@@ -42,7 +42,7 @@ int16  Variable signed
 uint16 Variable unsigned
 
 Class Cell   Cell definitions
-1 Cell allot   Cell seal
+#cell Self allot   Self seal
 Macro: @    ( obj -- n )   T @ H ;
 Macro: !    ( n obj -- )   T ! H ;
      : +!   ( n obj -- )   +! ;

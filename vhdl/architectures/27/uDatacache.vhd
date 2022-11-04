@@ -1,8 +1,8 @@
 -- ---------------------------------------------------------------------
--- @file : uDcache_XP2_27.vhd
+-- @file : uDatacache_27.vhd
 -- ---------------------------------------------------------------------
 --
--- Last change: KS 10.04.2021 17:38:35
+-- Last change: KS 01.11.2022 19:01:28
 -- @project: microCore
 -- @language: VHDL-93
 -- @copyright (c): Klaus Schleisiek, All Rights Reserved.
@@ -17,7 +17,7 @@
 -- limitations under the License.
 --
 -- @brief: Definition of the internal data memory.
--- Here fpga specific dual port memory IP for 27 bits has be included.
+-- Here fpga specific dual port memory IP for 27 bits has been included.
 -- Parameters for 27 bits are:
 -- CONSTANT data_width         : NATURAL := 27; -- data bus width
 -- CONSTANT cache_size         : NATURAL := 16#1000#; -- data cache memory size
@@ -26,6 +26,7 @@
 -- Version Author   Date       Changes
 --   210     ks    8-Jun-2020  initial version
 --  2300     ks    8-Mar-2021  Conversion to NUMERIC_STD
+--  2400     ks   17-Jun-2022  byte addressing using byte_addr_width
 -- ---------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
@@ -42,16 +43,28 @@ ENTITY uDatacache IS PORT (
 
 ARCHITECTURE rtl OF uDatacache IS
 
-ALIAS clk        : STD_LOGIC IS uBus.clk;
-ALIAS write      : STD_LOGIC IS uBus.write;
-ALIAS addr       : data_addr IS uBus.addr;
-ALIAS wdata      : data_bus  IS uBus.wdata;
-ALIAS dma_enable : STD_LOGIC IS dma_mem.enable;
-ALIAS dma_write  : STD_LOGIC IS dma_mem.write;
-ALIAS dma_addr   : data_addr IS dma_mem.addr;
-ALIAS dma_wdata  : data_bus  IS dma_mem.wdata;
+ALIAS clk            : STD_LOGIC IS uBus.clk;
+ALIAS clk_en         : STD_LOGIC IS uBus.clk_en;
+ALIAS mem_en         : STD_LOGIC IS uBus.mem_en;
+ALIAS bytes          : byte_type IS uBus.bytes;
+ALIAS write          : STD_LOGIC IS uBus.write;
+ALIAS addr           : data_addr IS uBus.addr;
+ALIAS wdata          : data_bus  IS uBus.wdata;
+ALIAS dma_enable     : STD_LOGIC IS dma_mem.enable;
+ALIAS dma_bytes      : byte_type IS dma_mem.bytes;
+ALIAS dma_write      : STD_LOGIC IS dma_mem.write;
+ALIAS dma_addr       : data_addr IS dma_mem.addr;
+ALIAS dma_wdata      : data_bus  IS dma_mem.wdata;
 
-SIGNAL enable    : STD_LOGIC;
+SIGNAL enable        : STD_LOGIC;
+
+SIGNAL bytes_en      : byte_addr;
+SIGNAL mem_wdata     : data_bus;
+SIGNAL mem_rdata     : data_bus;
+
+SIGNAL dma_bytes_en  : byte_addr;
+SIGNAL dma_mem_wdata : data_bus;
+SIGNAL dma_mem_rdata : data_bus;
 
 COMPONENT internal_Datamem_27 PORT (
    ResetA    : IN   STD_LOGIC;
@@ -61,7 +74,7 @@ COMPONENT internal_Datamem_27 PORT (
    AddressA  : IN   STD_LOGIC_VECTOR(11 DOWNTO 0);
    DataInA   : IN   STD_LOGIC_VECTOR(26 DOWNTO 0);
    QA        : OUT  STD_LOGIC_VECTOR(26 DOWNTO 0);
-
+-- dma
    ResetB    : IN   STD_LOGIC;
    ClockB    : IN   STD_LOGIC;
    ClockEnB  : IN   STD_LOGIC;
@@ -71,14 +84,14 @@ COMPONENT internal_Datamem_27 PORT (
    QB        : OUT  STD_LOGIC_VECTOR(26 DOWNTO 0)
 ); END COMPONENT internal_Datamem_27;
 
-SIGNAL slv_rdata      : STD_LOGIC_VECTOR(rdata'range);
+SIGNAL slv_mem_rdata  : STD_LOGIC_VECTOR(rdata'range);
 SIGNAL slv_dma_rdata  : STD_LOGIC_VECTOR(rdata'range);
 
 BEGIN
 
-enable <= uBus.clk_en AND uBus.mem_en WHEN  uBus.ext_en = '0'  ELSE '0';
+enable <= clk_en AND mem_en;
 
-make_sim_mem: IF  SIMULATION OR data_width /= 27  GENERATE
+make_sim_mem: IF  SIMULATION  GENERATE
 
    internal_data_mem: internal_dpram
    GENERIC MAP (data_width, cache_size, "rw_check", DMEM_file)
@@ -89,6 +102,7 @@ make_sim_mem: IF  SIMULATION OR data_width /= 27  GENERATE
       addra   => addr(cache_addr_width-1 DOWNTO 0),
       dia     => wdata,
       doa     => rdata,
+   -- dma port
       enb     => dma_enable,
       web     => dma_write,
       addrb   => dma_addr(cache_addr_width-1 DOWNTO 0),
@@ -96,7 +110,8 @@ make_sim_mem: IF  SIMULATION OR data_width /= 27  GENERATE
       dob     => dma_rdata
    );
 
-END GENERATE make_sim_mem; make_27_mem: IF  NOT SIMULATION AND data_width = 27  GENERATE
+END GENERATE make_sim_mem; make_syn_mem: IF  NOT SIMULATION  GENERATE
+-- instantiate FPGA specific IP for cell addressed memory here:
 
    instantiated_data_mem: internal_Datamem_27
    PORT MAP (
@@ -106,7 +121,8 @@ END GENERATE make_sim_mem; make_27_mem: IF  NOT SIMULATION AND data_width = 27  
       WrA       => write,
       AddressA  => std_logic_vector(addr(cache_addr_width-1 DOWNTO 0)),
       DataInA   => std_logic_vector(wdata),
-      QA        => slv_rdata,
+      QA        => slv_mem_rdata,
+   -- dma port
       ResetB    => '0',
       ClockB    => clk,
       ClockEnB  => dma_enable,
@@ -115,10 +131,11 @@ END GENERATE make_sim_mem; make_27_mem: IF  NOT SIMULATION AND data_width = 27  
       DataInB   => std_logic_vector(dma_wdata),
       QB        => slv_dma_rdata
    );
-   rdata     <= unsigned(slv_rdata);
+
+   rdata     <= unsigned(slv_mem_rdata);
    dma_rdata <= unsigned(slv_dma_rdata);
 
-END GENERATE make_27_mem;
+END GENERATE make_syn_mem;
 
 END rtl;
 

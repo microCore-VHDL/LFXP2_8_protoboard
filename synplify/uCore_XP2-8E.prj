@@ -1,7 +1,7 @@
 #--  Synopsys, Inc.
 #--  Version N-2018.03L-SP1-1
 #--  Project file D:\technik\microcore\hardware\xp2_8_protoboard\synplify\uCore_XP2-8E.prj
-#--  Written on Wed Feb  9 00:40:56 2022
+#--  Written on Sun Jun 26 19:22:29 2022
 
 
 #project files
@@ -14,11 +14,7 @@ add_file -vhdl -lib work "../vhdl/debugger.vhd"
 add_file -vhdl -lib work "../vhdl/bootload.vhd"
 add_file -vhdl -lib work "../vhdl/uProgmem.vhd"
 add_file -vhdl -lib work "../vhdl/uCore.vhd"
-#add_file -vhdl -lib work "../vhdl/uDatacache.vhd"  # automatic inference e.g. 24 bits
-#add_file -vhdl -lib work "../vhdl/uDcache_XP2_16.vhd"
-#add_file -vhdl -lib work "../vhdl/uDcache_XP2_18.vhd"
-#add_file -vhdl -lib work "../vhdl/uDcache_XP2_27.vhd"
-add_file -vhdl -lib work "../vhdl/uDcache_XP2_32.vhd"
+add_file -vhdl -lib work "../vhdl/uDatacache.vhd"
 add_file -vhdl -lib work "../vhdl/external_SRAM.vhd"
 add_file -vhdl -lib work "../vhdl/fpga.vhd"
 add_file -fpga_constraint "core_lattice.fdc"
@@ -27,7 +23,6 @@ add_file -fpga_constraint "core_lattice.fdc"
 impl -add synplify -type fpga
 
 #implementation attributes
-
 set_option -vlog_std sysv
 set_option -project_relative_includes 1
 
@@ -79,9 +74,6 @@ set_option -multi_file_compilation_unit 1
 
 # Compiler Options
 set_option -auto_infer_blackbox 1
-
-# Compiler Options
-set_option -vhdl2008 1
 
 #automatic place and route (vendor) options
 set_option -write_apr_constraint 1

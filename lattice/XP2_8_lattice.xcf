@@ -20,8 +20,8 @@
 				<BScanVal>0</BScanVal>
 			</Bypass>
 			<File>D:/technik/microcore/hardware/xp2_8_protoboard/lattice/XP2_8_lattice.jed</File>
-			<FileTime>11/23/20 12:15:08</FileTime>
-			<JedecChecksum>0x607D</JedecChecksum>
+			<FileTime>02/09/22 00:44:24</FileTime>
+			<JedecChecksum>0x8166</JedecChecksum>
 			<Operation>FLASH Erase,Program,Verify,Refresh</Operation>
 			<Option>
 				<SVFVendor>JTAG STANDARD</SVFVendor>

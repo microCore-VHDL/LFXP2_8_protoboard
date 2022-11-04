@@ -1,5 +1,5 @@
 \
-\ Last change: KS 04.06.2022 18:30:59
+\ Last change: KS 03.08.2022 18:06:11
 \
 \ MicroCore load screen to test all aspects of the multitasker.
 \ Use  .tasks and .semas to observe the state of the system.
@@ -23,15 +23,15 @@ Target new initialized          \ go into target compilation mode and initialize
 
 include constants.fs            \ MicroCore Register addresses and bits
 include debugger.fs
-library forth_lib.fs 
-library task_lib.fs  preload pause
+library forth_lib.fs
+include multitask.fs
 
 Task Blinker
 
 Semaphore Sema
 Semaphore Mailbox
 
-: mailbox-init  ( -- )   di   Mailbox 2 erase ;
+: mailbox-init  ( -- )   di   Mailbox 2 cells erase ;
 
 \ ----------------------------------------------------------------------
 \ lock ... unlock mutual exclusion via Sema.
@@ -114,7 +114,7 @@ init: init-tasks     ( -- )
 ;
 init: init-leds ( -- )  0 Leds ! ;
 
-: boot  ( -- )   0 #cache erase   CALL initialization  debug-service ;
+: boot  ( -- )   0 #cache erase   CALL initialization   debug-service ;
 
 #reset TRAP: rst    ( -- )            boot                 ;  \ compile branch to boot at reset vector location
 #isr   TRAP: isr    ( -- )            interrupt IRET       ;

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DiamondModule name="byte_cache_32" module="RAM_DQ" VendorName="Lattice Semiconductor Corporation" generator="IPexpress" date="2022 06 09 19:08:21.238" version="7.5" type="Module" synthesis="synplify" source_format="VHDL">
+  <Package>
+		<File name="" type="" modified="2022 06 09 19:08:21.053"/>
+		<File name="byte_cache_32.lpc" type="lpc" modified="2022 06 09 19:08:05.633"/>
+		<File name="byte_cache_32.vhd" type="top_level_vhdl" modified="2022 06 09 19:08:05.693"/>
+		<File name="byte_cache_32_tmpl.vhd" type="template_vhdl" modified="2022 06 09 19:08:05.693"/>
+		<File name="tb_byte_cache_32_tmpl.vhd" type="testbench_vhdl" modified="2022 06 09 19:08:05.697"/>
+  </Package>
+</DiamondModule>

@@ -1,0 +1,34 @@
+SCUBA, Version Diamond (64-bit) 3.11.3.469
+Sun Jul 10 18:44:55 2022
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2020 Lattice Semiconductor Corporation,  All rights reserved.
+
+    Issued command   : C:\lscc\diamond\3.11_x64\ispfpga\bin\nt64\scuba.exe -w -n byte_cache_16 -lang vhdl -synth synplify -bus_exp 7 -bb -arch mg5a00 -type ramdp -device LFXP2-8E -aaddr_width 13 -widtha 16 -baddr_width 13 -widthb 16 -anum_words 6144 -bnum_words 6144 -byte 8 -outdataB REGISTERED -writemodeA NORMAL -writemodeB NORMAL -resetmode SYNC -cascade -1 
+    Circuit name     : byte_cache_16
+    Module type      : RAM_DP_TRUE
+    Module Version   : 7.5
+    Ports            : 
+	Inputs       : DataInA[15:0], DataInB[15:0], ByteEnA[1:0], ByteEnB[1:0], AddressA[12:0], AddressB[12:0], ClockA, ClockB, ClockEnA, ClockEnB, WrA, WrB, ResetA, ResetB
+	Outputs      : QA[15:0], QB[15:0]
+    I/O buffer       : not inserted
+    EDIF output      : byte_cache_16.edn
+    VHDL output      : byte_cache_16.vhd
+    VHDL template    : byte_cache_16_tmpl.vhd
+    VHDL testbench    : tb_byte_cache_16_tmpl.vhd
+    VHDL purpose     : for synthesis and simulation
+    Bus notation     : big endian
+    Report output    : byte_cache_16.srp
+    Element Usage    :
+           AND2 : 2
+        FD1P3DX : 9
+            INV : 2
+          MUX81 : 32
+         DP16KB : 6
+    Estimated Resource Usage:
+            LUT : 66
+            EBR : 6
+            Reg : 9

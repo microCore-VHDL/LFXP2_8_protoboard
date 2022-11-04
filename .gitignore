@@ -104,3 +104,5 @@ modelSim/transcript
 *.mti
 
 *.mem
+
+*.ior
